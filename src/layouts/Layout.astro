@@ -1,0 +1,183 @@
+---
+import { url } from '../lib/url';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Maritime Jobs — Decarbonization & Wind Propulsion',
+  description = 'Job opportunities in maritime decarbonization, wind-assisted propulsion and ocean tech across Europe and beyond.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href={url('/')} class="logo">
+          <span class="logo-mark">⚓</span>
+          <span class="logo-text">Maritime Jobs</span>
+        </a>
+        <nav>
+          <a href={url('/')}>Listings</a>
+          <a href={url('/about')}>About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          Data from the May 2026 review <strong>"Job Opportunities — Maritime
+          Decarbonization & Wind Propulsion"</strong> by
+          <a href="https://www.linkedin.com/in/brierechristophe" target="_blank" rel="noopener">
+            Christophe Brière de La Hosseraye</a> —
+          <em>Velic Consulting</em>.
+        </p>
+        <p class="muted">
+          This is an unofficial aggregation. Always verify openings on the company's own site.
+        </p>
+      </div>
+    </footer>
+
+    <style is:global>
+      :root {
+        --ocean-900: #06203a;
+        --ocean-800: #0a2c4d;
+        --ocean-700: #0f3a66;
+        --ocean-500: #1f6fb2;
+        --ocean-300: #5ba9d8;
+        --turquoise: #2dd4bf;
+        --turquoise-dark: #14b8a6;
+        --sand: #f4efe6;
+        --paper: #ffffff;
+        --paper-2: #f7faff;
+        --ink: #0c1b2e;
+        --ink-2: #3c4f66;
+        --muted: #6b7a90;
+        --border: #d9e3ef;
+        --shadow: 0 2px 6px rgba(6, 32, 58, 0.05),
+          0 10px 25px rgba(6, 32, 58, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI',
+          Roboto, 'Helvetica Neue', Arial, sans-serif;
+        color: var(--ink);
+        background: var(--paper-2);
+        line-height: 1.55;
+        font-size: 16px;
+      }
+
+      a {
+        color: var(--ocean-500);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .site-header {
+        background: var(--paper);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 16px;
+        padding-bottom: 16px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--ocean-900);
+        font-weight: 700;
+        font-size: 1.05rem;
+        text-decoration: none;
+      }
+      .logo-mark {
+        font-size: 1.4rem;
+      }
+      .site-header nav {
+        display: flex;
+        gap: 24px;
+      }
+      .site-header nav a {
+        color: var(--ink-2);
+        font-weight: 500;
+      }
+
+      .site-footer {
+        margin-top: 80px;
+        padding: 32px 0 48px;
+        background: var(--ocean-900);
+        color: #cfdbe8;
+        font-size: 0.9rem;
+      }
+      .site-footer p {
+        margin: 4px 0;
+      }
+      .site-footer a {
+        color: #2dd4bf;
+      }
+      .site-footer .muted {
+        color: #8aa3bf;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: var(--ocean-900);
+        line-height: 1.2;
+        margin: 0 0 12px;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+    </style>
+  </body>
+</html>

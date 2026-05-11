@@ -1,0 +1,635 @@
+{
+  "source": {
+    "title": "Job Opportunities — Maritime Decarbonization & Wind Propulsion (May 2026)",
+    "author": "Christophe Brière de La Hosseraye",
+    "publisher": "Velic Consulting",
+    "totalAdvertised": 121
+  },
+  "companies": [
+    {
+      "slug": "airseas",
+      "name": "AIRSEAS",
+      "country": "FR",
+      "city": "Nantes",
+      "category": "Wind propulsion",
+      "description": "Kite propulsion systems for cargo ships (Seawing).",
+      "website": "https://www.airseas.com",
+      "applyUrl": "https://careers.werecruit.io/fr/airseas",
+      "jobs": [
+        { "title": "Technicien en automatisme", "domain": "Engineering", "type": "job" },
+        { "title": "Acheteur industriel", "domain": "Business", "type": "job" },
+        { "title": "Ingénieur développement logiciel simulation", "domain": "Software", "type": "job" },
+        { "title": "Projeteur électrique", "domain": "Engineering", "type": "job" },
+        { "title": "Concepteur système mécanique", "domain": "Engineering", "type": "job" }
+      ]
+    },
+    {
+      "slug": "anemoi",
+      "name": "ANEMOI",
+      "country": "GB",
+      "city": "London",
+      "category": "Wind propulsion",
+      "description": "Rotor sail technology provider.",
+      "website": "https://anemoimarine.com",
+      "applyUrl": "https://lnkd.in/eaqcPb66",
+      "jobs": [
+        { "title": "Aftersales and service manager", "domain": "Business", "type": "job" },
+        { "title": "Marine electrical & Control engineer", "domain": "Engineering", "type": "job" },
+        { "title": "Non-executive director / Professional advisor", "domain": "Business", "type": "job" },
+        { "title": "Technical sales engineer", "domain": "Business", "type": "job" },
+        { "title": "Marketing manager", "domain": "Business", "type": "job" },
+        { "title": "Senior marketing executive", "domain": "Business", "type": "job" }
+      ]
+    },
+    {
+      "slug": "bar-technologies",
+      "name": "BAR Technologies",
+      "country": "GB",
+      "city": "Portsmouth",
+      "category": "Wind propulsion",
+      "description": "WindWings rigid wing-sail technology.",
+      "website": "https://www.bartechnologies.uk",
+      "applyUrl": "https://www.bartechnologies.uk/careers/",
+      "jobs": [
+        { "title": "Senior control systems engineer", "domain": "Engineering", "type": "job" }
+      ]
+    },
+    {
+      "slug": "beyond-the-sea",
+      "name": "Beyond the Sea",
+      "country": "FR",
+      "city": "Arcachon",
+      "category": "Wind propulsion",
+      "description": "Kite traction systems for ships (Yves Parlier).",
+      "website": "https://www.beyond-the-sea.com",
+      "applyUrl": "https://beyond-the-sea.zohorecruit.eu/jobs/Careers",
+      "jobs": [
+        { "title": "Automaticien électrotechnicien", "domain": "Engineering", "type": "job" },
+        { "title": "Chef de projet", "domain": "Business", "type": "job" },
+        { "title": "Ingénieur innovation", "domain": "Engineering", "type": "job" },
+        { "title": "Chef de projet communication", "domain": "Business", "type": "job" },
+        { "title": "Ingénieur kite design", "domain": "Engineering", "type": "job" },
+        { "title": "Coordinateur de projets", "domain": "Business", "type": "job" },
+        { "title": "Ingénieur performance", "domain": "Data & AI", "type": "job" },
+        { "title": "Acheteur / Supply Chain", "domain": "Business", "type": "job" },
+        { "title": "Ingénieur BE", "domain": "Engineering", "type": "job" },
+        { "title": "Ingénieur en contrôle de systèmes / automatique", "domain": "Engineering", "type": "internship" },
+        { "title": "Animateur qualité", "domain": "Business", "type": "internship" },
+        { "title": "Ingénieur ACV", "domain": "Consulting", "type": "internship" },
+        { "title": "Ingénieur QSSE", "domain": "Engineering", "type": "internship" },
+        { "title": "Développeur IHM / Fullstack", "domain": "Software", "type": "internship" },
+        { "title": "Ingénieur performance", "domain": "Data & AI", "type": "internship" },
+        { "title": "Conception d'outils IA et chatbots", "domain": "Data & AI", "type": "internship" },
+        { "title": "Ingénieur BE", "domain": "Engineering", "type": "internship" }
+      ]
+    },
+    {
+      "slug": "boaton",
+      "name": "BoatOn",
+      "country": "FR",
+      "city": "Bordeaux",
+      "category": "Maritime SaaS",
+      "description": "SaaS & maritime insurance platform.",
+      "website": "https://boaton.fr",
+      "applyUrl": "https://fr.indeed.com/cmp/Boaton",
+      "jobs": [
+        { "title": "Commercial SaaS", "domain": "Business", "type": "job" },
+        { "title": "Customer Success Manager", "domain": "Business", "type": "job" },
+        { "title": "Chargé de développement — Assurance maritime", "domain": "Business", "type": "job" }
+      ]
+    },
+    {
+      "slug": "bound4blue",
+      "name": "bound4blue",
+      "country": "ES",
+      "city": "Barcelona",
+      "category": "Wind propulsion",
+      "description": "eSAIL suction wing sails for commercial ships.",
+      "website": "https://bound4blue.com",
+      "applyUrl": "https://lnkd.in/eWm4q8BR",
+      "jobs": [
+        { "title": "Head of mechanical engineering", "domain": "Engineering", "type": "job" },
+        { "title": "Senior automation & Control engineer", "domain": "Engineering", "type": "job" },
+        { "title": "Accounting specialist", "domain": "Business", "type": "job" },
+        { "title": "Mechanical supplier quality engineer", "domain": "Engineering", "type": "job", "country": "CN", "city": "Shanghai" }
+      ]
+    },
+    {
+      "slug": "bureau-veritas",
+      "name": "Bureau Veritas Marine & Offshore",
+      "country": "FR",
+      "city": "Nantes",
+      "category": "Classification & consulting",
+      "description": "Ship classification and certification.",
+      "website": "https://marine-offshore.bureauveritas.com",
+      "applyUrl": "https://www.linkedin.com/jobs/view/4402319339/",
+      "jobs": [
+        { "title": "Responsable transition énergétique", "domain": "Consulting", "type": "job" }
+      ]
+    },
+    {
+      "slug": "chantiers-atlantique",
+      "name": "Chantiers de l'Atlantique",
+      "country": "FR",
+      "city": "Saint-Nazaire",
+      "category": "Shipbuilder",
+      "description": "Major shipyard, building Solid Sail propulsion.",
+      "website": "https://chantiers-atlantique.com",
+      "applyUrl": "https://carrieres-offresemploi.chantiers-atlantique.com/",
+      "jobs": [
+        { "title": "Ingénieur automatisme et électricité", "domain": "Engineering", "type": "job" },
+        { "title": "Ingénieur performance énergétique", "domain": "Engineering", "type": "internship" }
+      ]
+    },
+    {
+      "slug": "clippership",
+      "name": "Clippership",
+      "country": "US",
+      "city": "San Francisco",
+      "category": "Wind propulsion",
+      "description": "Sail-powered cargo shipping.",
+      "website": "https://clippership.org",
+      "applyUrl": "https://www.linkedin.com/company/clippership/jobs/",
+      "jobs": [
+        { "title": "Mechanical engineer", "domain": "Engineering", "type": "job" }
+      ]
+    },
+    {
+      "slug": "cma-cgm",
+      "name": "CMA CGM",
+      "country": "FR",
+      "city": "Marseille",
+      "category": "Shipping operator",
+      "description": "Global container shipping operator.",
+      "website": "https://www.cma-cgm.com",
+      "applyUrl": "https://jobs.cmacgm-group.com/",
+      "jobs": [
+        { "title": "Product Owner — Smartship Data", "domain": "Data & AI", "type": "job" },
+        { "title": "Apprentice Data Quality & Analytics Engineer", "domain": "Data & AI", "type": "job" }
+      ]
+    },
+    {
+      "slug": "d-ice-engineering",
+      "name": "D-ICE Engineering",
+      "country": "FR",
+      "city": "Nantes",
+      "category": "Naval architecture",
+      "description": "Digital twin & ship modelling.",
+      "website": "https://d-ice.eu",
+      "applyUrl": "https://lnkd.in/djYA2BfK",
+      "jobs": [
+        { "title": "Bras droit CEO / Chief of staff", "domain": "Business", "type": "internship" },
+        { "title": "Open ship digital-twin", "domain": "Data & AI", "type": "internship" },
+        { "title": "Digital twin management & data validation", "domain": "Data & AI", "type": "internship" },
+        { "title": "Ship modeling & simulation", "domain": "Engineering", "type": "internship" }
+      ]
+    },
+    {
+      "slug": "econowind",
+      "name": "Econowind",
+      "country": "NL",
+      "city": "Amsterdam",
+      "category": "Wind propulsion",
+      "description": "VentoFoil wind-assist sails for vessels.",
+      "website": "https://www.econowind.nl",
+      "applyUrl": "https://lnkd.in/ecfZhsmq",
+      "jobs": [
+        { "title": "Area sales manager", "domain": "Business", "type": "job" },
+        { "title": "Electrical Field Engineer", "domain": "Engineering", "type": "job" },
+        { "title": "Electrical technician", "domain": "Engineering", "type": "job" },
+        { "title": "Maritime field engineer", "domain": "Engineering", "type": "job" },
+        { "title": "Proposal engineer", "domain": "Engineering", "type": "job" }
+      ]
+    },
+    {
+      "slug": "enerva-marine",
+      "name": "Enerva Marine",
+      "country": "IN",
+      "city": "Delhi",
+      "category": "Performance & routing",
+      "description": "Vessel performance and routing software.",
+      "website": "https://enervamarine.com",
+      "applyUrl": "https://www.linkedin.com/posts/varisth-agarwal-b5521a36_vesselperformance-careers-fueloptimization-activity-7438070247334723584-llXd",
+      "jobs": [
+        { "title": "Voyage / weather routing specialist", "domain": "Data & AI", "type": "job" },
+        { "title": "Vessel performance engineer", "domain": "Data & AI", "type": "job" }
+      ]
+    },
+    {
+      "slug": "ensta",
+      "name": "ENSTA",
+      "country": "FR",
+      "city": "Paris / Brest",
+      "category": "Academic / Research",
+      "description": "French engineering school — maritime research.",
+      "website": "https://www.ensta.fr",
+      "applyUrl": "https://www.linkedin.com/posts/matthieu-sacher_offre-post-doctorat-ensta-brest-activity-7417545833279258624-UR1o",
+      "jobs": [
+        { "title": "Post-Doc — Réduction de scénarios météorologiques", "domain": "Research", "type": "research" }
+      ]
+    },
+    {
+      "slug": "genevos",
+      "name": "Genevos",
+      "country": "FR",
+      "city": "La Rochelle",
+      "category": "Hydrogen propulsion",
+      "description": "Hydrogen fuel-cell systems for maritime.",
+      "website": "https://www.genevos.com",
+      "applyUrl": "https://genevos.com/careers/",
+      "jobs": [
+        { "title": "Responsable ingénierie PEM", "domain": "Engineering", "type": "job" },
+        { "title": "Office manager", "domain": "Business", "type": "job" },
+        { "title": "Dessinateur mécanique", "domain": "Engineering", "type": "job" },
+        { "title": "Responsable des achats et de la performance fournisseurs", "domain": "Business", "type": "job" },
+        { "title": "Ingénieur commercial", "domain": "Business", "type": "job" },
+        { "title": "Responsable marketing et communication", "domain": "Business", "type": "job" },
+        { "title": "Chef de projet", "domain": "Business", "type": "job" },
+        { "title": "Ingénieur contrôle commande", "domain": "Engineering", "type": "job" },
+        { "title": "Ingénieur systèmes électriques", "domain": "Engineering", "type": "job" },
+        { "title": "Ingénieur en conception mécanique", "domain": "Engineering", "type": "job" },
+        { "title": "Ingénieur CFD", "domain": "Engineering", "type": "job" }
+      ]
+    },
+    {
+      "slug": "grain-de-sail",
+      "name": "Grain de Sail",
+      "country": "FR",
+      "city": "Morlaix",
+      "category": "Sail cargo operator",
+      "description": "Wind-powered cargo transport (wine, coffee, chocolate).",
+      "website": "https://graindesail.com",
+      "applyUrl": "https://www.linkedin.com/posts/grain-de-sail-logistics_gestionnaireadv-transport-maritime-offre-activity-7457064032345206784-uird",
+      "jobs": [
+        { "title": "Gestionnaire ADV", "domain": "Business", "type": "job" }
+      ]
+    },
+    {
+      "slug": "gt-wings",
+      "name": "GT Wings",
+      "country": "GB",
+      "city": "Southampton",
+      "category": "Wind propulsion",
+      "description": "AirWing solid wing-sail technology.",
+      "website": "https://gt-wings.com",
+      "applyUrl": "https://www.linkedin.com/posts/gt-wings_were-hiring-the-gt-wings-team-is-growing-activity-7427398642669486081-5lna",
+      "jobs": [
+        { "title": "Project manager — Engineering delivery", "domain": "Business", "type": "job" },
+        { "title": "Senior procurement and subcontract manager", "domain": "Business", "type": "job" },
+        { "title": "Performance engineer", "domain": "Data & AI", "type": "job" },
+        { "title": "Project engineer", "domain": "Engineering", "type": "job" },
+        { "title": "Principal design engineer", "domain": "Engineering", "type": "job" }
+      ]
+    },
+    {
+      "slug": "innova-solutions",
+      "name": "Innova Solutions",
+      "country": "FR",
+      "city": "TBC",
+      "category": "Performance & routing",
+      "description": "Vessel performance services.",
+      "website": "https://innova-solutions.fr",
+      "applyUrl": "https://www.linkedin.com/posts/mat%C3%A9o-sapone-83173b150_ia-ai-maritime-activity-7447969195822157824-JbAh",
+      "jobs": [
+        { "title": "Analyste performance navire", "domain": "Data & AI", "type": "job" }
+      ]
+    },
+    {
+      "slug": "institut-ocean",
+      "name": "Institut de l'Océan",
+      "country": "FR",
+      "city": "Paris",
+      "category": "NGO / Mission",
+      "description": "Sorbonne-led ocean research and policy institute.",
+      "website": "https://www.institut-ocean.org",
+      "applyUrl": "https://choisirleservicepublic.gouv.fr/offre-emploi/charge-de-mission-au-sein-de-l-institut-de-l-ocean-de-l-asu-fh-ref-2026-1352-reference-2026-2266469",
+      "jobs": [
+        { "title": "Chargé de mission", "domain": "Business", "type": "job" }
+      ]
+    },
+    {
+      "slug": "katapult-ocean",
+      "name": "Katapult Ocean",
+      "country": "SG",
+      "city": "Singapore",
+      "category": "Investment",
+      "description": "Ocean-focused VC fund.",
+      "website": "https://katapult.vc/ocean",
+      "applyUrl": "https://www.katapultocean.com/articles/co-managing-director-asia-ocean-fund",
+      "jobs": [
+        { "title": "Co-managing director — Asia Ocean Fund", "domain": "Business", "type": "job" }
+      ]
+    },
+    {
+      "slug": "lloyds-register",
+      "name": "Lloyd's Register",
+      "country": "IN",
+      "city": "Mumbai",
+      "category": "Classification & consulting",
+      "description": "Maritime classification society.",
+      "website": "https://www.lr.org",
+      "applyUrl": "https://jobs.lr.org/search/?createNewAlert=false&q=ship",
+      "jobs": [
+        { "title": "Environmental Specialist", "domain": "Consulting", "type": "job" }
+      ]
+    },
+    {
+      "slug": "mwi",
+      "name": "Marine Weather Intelligence (MWI)",
+      "country": "FR",
+      "city": "Auray",
+      "category": "Weather & routing",
+      "description": "Weather routing and metocean data services.",
+      "website": "https://marine-weather.com",
+      "applyUrl": "https://marine-weather.com/careers/",
+      "jobs": [
+        { "title": "Back-end API designer", "domain": "Software", "type": "job" },
+        { "title": "Weather analyst", "domain": "Data & AI", "type": "job" },
+        { "title": "Technical project manager", "domain": "Business", "type": "job" },
+        { "title": "Data scientist", "domain": "Data & AI", "type": "internship" }
+      ]
+    },
+    {
+      "slug": "marin",
+      "name": "MARIN (Maritime Research Institute Netherlands)",
+      "country": "NL",
+      "city": "Wageningen",
+      "category": "Academic / Research",
+      "description": "Independent maritime research institute.",
+      "website": "https://www.marin.nl",
+      "applyUrl": "https://www.linkedin.com/jobs/view/4392527077/",
+      "jobs": [
+        { "title": "Project engineer analyse", "domain": "Engineering", "type": "job" },
+        { "title": "HR Medewerker", "domain": "Business", "type": "job" },
+        { "title": "Servicemonteur Elektrotechniek", "domain": "Engineering", "type": "job" }
+      ]
+    },
+    {
+      "slug": "merconcept",
+      "name": "MerConcept",
+      "country": "FR",
+      "city": "Concarneau",
+      "category": "Naval architecture",
+      "description": "François Gabart's offshore racing & R&D studio.",
+      "website": "https://www.merconcept.com",
+      "applyUrl": "https://www.linkedin.com/posts/merconcept1_ing%C3%A9nieure-%C3%A9lectronique-automatique-ia-activity-7456966552249151488-GxXu",
+      "jobs": [
+        { "title": "Ingénieur électronique, automatique, IA", "domain": "Engineering", "type": "job" }
+      ]
+    },
+    {
+      "slug": "neptech",
+      "name": "NepTech",
+      "country": "FR",
+      "city": "Aix-en-Provence",
+      "category": "Naval architecture",
+      "description": "Naval architecture and ship design.",
+      "website": "https://www.neptech.fr",
+      "applyUrl": "https://lnkd.in/e-VDupzN",
+      "jobs": [
+        { "title": "Architecte naval", "domain": "Engineering", "type": "internship" },
+        { "title": "Data scientist", "domain": "Data & AI", "type": "internship" }
+      ]
+    },
+    {
+      "slug": "norsepower",
+      "name": "Norsepower",
+      "country": "FI",
+      "city": "Helsinki",
+      "category": "Wind propulsion",
+      "description": "Rotor sails for commercial shipping.",
+      "website": "https://www.norsepower.com",
+      "applyUrl": "https://careers.norsepower.com/jobs",
+      "jobs": [
+        { "title": "Group Controller", "domain": "Business", "type": "job" }
+      ]
+    },
+    {
+      "slug": "oceanbird",
+      "name": "Oceanbird",
+      "country": "SE",
+      "city": "Stockholm",
+      "category": "Wind propulsion",
+      "description": "Wing sails for large cargo ships (Wallenius).",
+      "website": "https://www.theoceanbird.com",
+      "applyUrl": "https://www.theoceanbird.com/about-us/careers",
+      "jobs": [
+        { "title": "Hydraulics engineer", "domain": "Engineering", "type": "job" }
+      ]
+    },
+    {
+      "slug": "oceanwings",
+      "name": "OceanWings",
+      "country": "FR",
+      "city": "Paris",
+      "category": "Wind propulsion",
+      "description": "Automated wingsail propulsion (VPLP).",
+      "website": "https://oceanwings.fr",
+      "applyUrl": "https://lnkd.in/eE5zYKPW",
+      "jobs": [
+        { "title": "SEO & Communication", "domain": "Business", "type": "internship" }
+      ]
+    },
+    {
+      "slug": "orient-express-sailing",
+      "name": "Orient Express Sailing Yachts",
+      "country": "FR",
+      "city": "Paris",
+      "category": "Sail cargo operator",
+      "description": "Luxury sailing yachts — Accor / Chantiers de l'Atlantique partnership.",
+      "website": "https://sailing-yachts.orient-express.com",
+      "applyUrl": "https://sailing-yachts.orient-express.com/fr/sailing-yachts/carrieres",
+      "jobs": [
+        { "title": "Junior engineer — Sustainability & energy efficiency (Sept. 2026)", "domain": "Engineering", "type": "internship" }
+      ]
+    },
+    {
+      "slug": "ose-engineering",
+      "name": "OSE Engineering",
+      "country": "FR",
+      "city": "Remote",
+      "category": "Software & AI",
+      "description": "Modelling and decision optimization.",
+      "website": "https://www.ose-engineering.fr",
+      "applyUrl": "https://www.welcometothejungle.com/fr/companies/ose-engineering/jobs",
+      "jobs": [
+        { "title": "IA & modélisation physique", "domain": "Data & AI", "type": "job" },
+        { "title": "Développeur back-end Python", "domain": "Software", "type": "job" },
+        { "title": "Ingénieur Modélisation Système", "domain": "Data & AI", "type": "job" }
+      ]
+    },
+    {
+      "slug": "oslomet-oceanlab",
+      "name": "OsloMet Oceanlab",
+      "country": "NO",
+      "city": "Oslo",
+      "category": "Academic / Research",
+      "description": "Norwegian ocean research lab — havlaboratoriet.",
+      "website": "https://www.oslomet.no",
+      "applyUrl": "https://www.oslomet.no/en/work/job-openings/",
+      "jobs": [
+        { "title": "Data Analytics & Optimization for Wind-Assisted Ship Routing", "domain": "Research", "type": "research" }
+      ]
+    },
+    {
+      "slug": "royal-caribbean",
+      "name": "Royal Caribbean Group",
+      "country": "US",
+      "city": "Miami",
+      "category": "Shipping operator",
+      "description": "Global cruise line operator with offices in the US and UK.",
+      "website": "https://www.royalcaribbeangroup.com",
+      "applyUrl": "https://www.linkedin.com/jobs/search/?currentJobId=4262020236&f_C=68313053%2C3840996%2C165974&geoId=92000000&keywords=decarbonization",
+      "jobs": [
+        { "title": "Decarbonization analyst", "domain": "Consulting", "type": "job" },
+        { "title": "Senior manager, Decarbonization and energy strategy", "domain": "Business", "type": "job" },
+        { "title": "Senior analyst, energy efficiency performance", "domain": "Data & AI", "type": "job", "country": "GB", "city": "Weybridge" }
+      ]
+    },
+    {
+      "slug": "spie",
+      "name": "SPIE",
+      "country": "FR",
+      "city": "Saint-Nazaire",
+      "category": "Engineering services",
+      "description": "Multi-technical engineering services group.",
+      "website": "https://www.spie.com",
+      "applyUrl": "https://www.join.spie-job.com/offre-de-emploi/emploi-automaticien-senior-h-f_41862.aspx",
+      "jobs": [
+        { "title": "Automaticien senior", "domain": "Engineering", "type": "job" }
+      ]
+    },
+    {
+      "slug": "spinergie",
+      "name": "Spinergie",
+      "country": "FR",
+      "city": "Paris",
+      "category": "Offshore data & analytics",
+      "description": "Offshore vessel data & analytics platform.",
+      "website": "https://www.spinergie.com",
+      "applyUrl": "https://www.spinergie.com/careers#open-positions",
+      "jobs": [
+        { "title": "Senior sales manager", "domain": "Business", "type": "job" },
+        { "title": "Lead offshore wind analyst", "domain": "Data & AI", "type": "job" },
+        { "title": "Senior sales manager", "domain": "Business", "type": "job", "country": "GB", "city": "London" }
+      ]
+    },
+    {
+      "slug": "syroco",
+      "name": "Syroco",
+      "country": "FR",
+      "city": "Marseille",
+      "category": "Performance & routing",
+      "description": "Voyage optimization and digital twin.",
+      "website": "https://www.syroco.io",
+      "applyUrl": "https://syro.co/en/company-about-syroco/",
+      "jobs": [
+        { "title": "Sales representative — Southern Europe", "domain": "Business", "type": "job" },
+        { "title": "Sales representative — Netherlands", "domain": "Business", "type": "job" },
+        { "title": "Regional sales manager Germany", "domain": "Business", "type": "job", "country": "DE", "city": "Hamburg" },
+        { "title": "Customer success manager", "domain": "Business", "type": "job", "country": "DE", "city": "Hamburg" },
+        { "title": "Communication & Content marketing", "domain": "Business", "type": "internship" },
+        { "title": "HR & Finance operations", "domain": "Business", "type": "internship" },
+        { "title": "Data engineer", "domain": "Data & AI", "type": "internship" },
+        { "title": "Product data analyst", "domain": "Data & AI", "type": "internship" },
+        { "title": "Customer project manager", "domain": "Business", "type": "internship" },
+        { "title": "Operational support & onwatch improvement", "domain": "Business", "type": "internship" }
+      ]
+    },
+    {
+      "slug": "transport-environment",
+      "name": "Transport & Environment (T&E)",
+      "country": "BE",
+      "city": "Brussels",
+      "category": "NGO / Mission",
+      "description": "European NGO on transport decarbonization.",
+      "website": "https://www.transportenvironment.org",
+      "applyUrl": "https://www.linkedin.com/jobs/view/4406967327/",
+      "jobs": [
+        { "title": "Sustainable fuels analyst", "domain": "Consulting", "type": "job" }
+      ]
+    },
+    {
+      "slug": "temo",
+      "name": "TEMO France",
+      "country": "FR",
+      "city": "Vannes",
+      "category": "Electric propulsion",
+      "description": "Electric outboard motors for small craft.",
+      "website": "https://www.temo.world",
+      "applyUrl": "https://www.linkedin.com/company/temo-france/jobs/",
+      "jobs": [
+        { "title": "Technico-commercial nautisme", "domain": "Business", "type": "job" }
+      ]
+    },
+    {
+      "slug": "toqua",
+      "name": "Toqua",
+      "country": "BE",
+      "city": "Ghent",
+      "category": "Performance & routing",
+      "description": "AI-driven ship performance models.",
+      "website": "https://www.toqua.ai",
+      "applyUrl": "https://toqua.ai/careers",
+      "jobs": [
+        { "title": "AI engineer", "domain": "Data & AI", "type": "job" },
+        { "title": "Operations Leads", "domain": "Business", "type": "job" }
+      ]
+    },
+    {
+      "slug": "totalenergies",
+      "name": "TotalEnergies",
+      "country": "FR",
+      "city": "Paris",
+      "category": "Energy major",
+      "description": "Energy and shipping integrator.",
+      "website": "https://totalenergies.com",
+      "applyUrl": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Ing-nieur-performance-maritime-d-butant-H-F/77976#",
+      "jobs": [
+        { "title": "Ingénieur performance maritime débutant", "domain": "Data & AI", "type": "job" }
+      ]
+    },
+    {
+      "slug": "wisamo",
+      "name": "WISAMO",
+      "country": "FR",
+      "city": "Vannes & Nantes",
+      "category": "Wind propulsion",
+      "description": "Michelin inflatable wing sail.",
+      "website": "https://wisamo.michelin.com",
+      "applyUrl": "https://michelinhr.wd3.myworkdayjobs.com/fr-FR/Michelin?q=wisamo",
+      "jobs": [
+        { "title": "Responsable bureau d'études", "domain": "Engineering", "type": "job" },
+        { "title": "Ingénieur développement & industrialisation (alternance)", "domain": "Engineering", "type": "internship" }
+      ]
+    },
+    {
+      "slug": "zelin",
+      "name": "Zelin",
+      "country": "FR",
+      "city": "Toulouse",
+      "category": "Software & AI",
+      "description": "CFD, metocean and AI services.",
+      "website": "https://www.zelin.io",
+      "applyUrl": "https://www.linkedin.com/jobs/view/4405201269/",
+      "jobs": [
+        { "title": "Ingénieur Simulation & Métocéan", "domain": "Data & AI", "type": "job" },
+        { "title": "Ingénieur CFD & IA", "domain": "Engineering", "type": "job" }
+      ]
+    },
+    {
+      "slug": "zeronorth",
+      "name": "ZeroNorth",
+      "country": "IN",
+      "city": "Mumbai",
+      "category": "Performance & routing",
+      "description": "Voyage optimization platform.",
+      "website": "https://zeronorth.com",
+      "applyUrl": "https://lnkd.in/d7hyhGhC",
+      "jobs": [
+        { "title": "Customer experience specialist", "domain": "Business", "type": "job" },
+        { "title": "Team lead — Onboarding & Data operations", "domain": "Data & AI", "type": "job" }
+      ]
+    }
+  ]
+}

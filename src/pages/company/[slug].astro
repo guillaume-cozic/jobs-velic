@@ -1,0 +1,295 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {
+  companies,
+  countryFlag,
+  countryLabel,
+  typeLabel,
+  jobsByType,
+} from '../../lib/jobs';
+import type { Job } from '../../lib/jobs';
+import { url } from '../../lib/url';
+
+export function getStaticPaths() {
+  return companies.map((company) => ({
+    params: { slug: company.slug },
+    props: { company },
+  }));
+}
+
+const { company } = Astro.props;
+const groups = jobsByType(company);
+
+const sections: { key: 'job' | 'internship' | 'research'; label: string; items: Job[] }[] = [
+  { key: 'job', label: 'Permanent positions', items: groups.jobs },
+  { key: 'internship', label: 'Internships / Alternance', items: groups.internships },
+  { key: 'research', label: 'Research', items: groups.research },
+].filter((s) => s.items.length > 0);
+---
+
+<Layout title={`${company.name} — Maritime Jobs`} description={company.description}>
+  <section class="company-hero">
+    <div class="container">
+      <a href={url('/')} class="back-link">← Back to listings</a>
+
+      <div class="company-header">
+        <div>
+          <p class="company-eyebrow">
+            <span>{countryFlag(company.country)} {countryLabel(company.country)} — {company.city}</span>
+            <span class="dot">·</span>
+            <span>{company.category}</span>
+          </p>
+          <h1>{company.name}</h1>
+          <p class="company-desc">{company.description}</p>
+        </div>
+
+        <div class="hero-actions">
+          <a class="external-link primary" href={company.applyUrl} target="_blank" rel="noopener">
+            View openings ↗
+          </a>
+          <a class="external-link secondary" href={company.website} target="_blank" rel="noopener">
+            Company site
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container company-section">
+    {
+      sections.map((section) => (
+        <div class="role-section">
+          <h2>
+            {section.label}{' '}
+            <span class="count">({section.items.length})</span>
+          </h2>
+
+          <ul class="role-list">
+            {section.items.map((job) => {
+              const country = job.country ?? company.country;
+              const city = job.city ?? company.city;
+              const applyUrl = job.applyUrl ?? company.applyUrl;
+              const showLocation =
+                country !== company.country || city !== company.city;
+              return (
+                <li class="role-row">
+                  <div class="role-main">
+                    <span class={`badge badge-${section.key}`}>
+                      {typeLabel(section.key)}
+                    </span>
+                    <span class="role-title">{job.title}</span>
+                    {showLocation && (
+                      <span class="role-loc">
+                        {countryFlag(country)} {city}
+                      </span>
+                    )}
+                  </div>
+                  <div class="role-side">
+                    <span class="role-domain">{job.domain}</span>
+                    <a
+                      class="apply-link"
+                      href={applyUrl}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Apply ↗
+                    </a>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))
+    }
+
+    <p class="muted footnote">
+      Listings sourced from the May 2026 review by Velic Consulting. For
+      official applications, please verify the role on the company's careers page.
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .company-hero {
+    background: linear-gradient(
+      135deg,
+      var(--ocean-900) 0%,
+      var(--ocean-700) 100%
+    );
+    color: white;
+    padding: 40px 0 56px;
+  }
+
+  .back-link {
+    color: #cfdbe8;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  .back-link:hover {
+    color: white;
+  }
+
+  .company-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .company-eyebrow {
+    color: var(--turquoise);
+    font-size: 0.92rem;
+    margin: 0 0 10px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    opacity: 0.6;
+  }
+
+  .company-hero h1 {
+    color: white;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    margin: 0 0 12px;
+  }
+  .company-desc {
+    color: #cfdbe8;
+    max-width: 640px;
+    margin: 0;
+    font-size: 1.02rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .external-link {
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .external-link.primary {
+    background: var(--turquoise);
+    color: var(--ocean-900);
+  }
+  .external-link.primary:hover {
+    background: white;
+    text-decoration: none;
+  }
+  .external-link.secondary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #cfdbe8;
+  }
+  .external-link.secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    color: white;
+  }
+
+  .company-section {
+    padding-top: 32px;
+  }
+
+  .role-section + .role-section {
+    margin-top: 32px;
+  }
+
+  h2 .count {
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.85em;
+  }
+
+  .role-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .role-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .role-row:last-child {
+    border-bottom: 0;
+  }
+
+  .role-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .role-title {
+    font-weight: 600;
+    color: var(--ocean-900);
+  }
+  .role-loc {
+    color: var(--muted);
+    font-size: 0.85rem;
+    background: var(--paper-2);
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+  .role-side {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .role-domain {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .apply-link {
+    color: var(--ocean-500);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+  .badge-job {
+    background: rgba(45, 212, 191, 0.15);
+    color: #0d7869;
+  }
+  .badge-internship {
+    background: rgba(31, 111, 178, 0.12);
+    color: var(--ocean-700);
+  }
+  .badge-research {
+    background: rgba(168, 85, 247, 0.12);
+    color: #6d28d9;
+  }
+
+  .footnote {
+    font-size: 0.85rem;
+    margin-top: 24px;
+  }
+</style>

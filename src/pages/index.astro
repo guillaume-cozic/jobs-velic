@@ -1,0 +1,334 @@
+---
+import Layout from '../layouts/Layout.astro';
+import JobCard from '../components/JobCard.astro';
+import {
+  allListings,
+  companies,
+  source,
+  uniqueCountries,
+  uniqueDomains,
+  uniqueTypes,
+  countryFlag,
+  countryLabel,
+  typeLabel,
+  totalsByType,
+} from '../lib/jobs';
+
+const countries = uniqueCountries();
+const domains = uniqueDomains();
+const types = uniqueTypes();
+const totalJobs = allListings.length;
+const totalCompanies = companies.length;
+const totals = totalsByType();
+---
+
+<Layout>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">{source.title.includes('May 2026') ? 'May 2026' : ''} · Maritime decarbonization</p>
+      <h1>Jobs in maritime decarbonization & wind propulsion</h1>
+      <p class="lede">
+        A curated snapshot of {totalJobs} open positions across
+        {totalCompanies} companies — wind sails, hydrogen, performance routing,
+        AI, naval architecture. A real industrial sector is emerging.
+      </p>
+      <div class="hero-stats">
+        <div><strong>{totals.job}</strong> open jobs</div>
+        <div><strong>{totals.internship}</strong> internships</div>
+        <div><strong>{totalCompanies}</strong> companies</div>
+        <div><strong>{countries.length}</strong> countries</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container listings-section">
+    <div class="toolbar">
+      <input
+        type="search"
+        id="search"
+        placeholder="Search roles, companies, cities, domains…"
+        autocomplete="off"
+      />
+
+      <div class="filter-group">
+        <label for="filter-country">Country</label>
+        <select id="filter-country">
+          <option value="">All</option>
+          {
+            countries.map((c) => (
+              <option value={c}>
+                {countryFlag(c)} {countryLabel(c)}
+              </option>
+            ))
+          }
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filter-domain">Domain</label>
+        <select id="filter-domain">
+          <option value="">All</option>
+          {domains.map((d) => <option value={d}>{d}</option>)}
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filter-type">Type</label>
+        <select id="filter-type">
+          <option value="">All</option>
+          {types.map((t) => <option value={t}>{typeLabel(t)}</option>)}
+        </select>
+      </div>
+
+      <button id="reset-filters" type="button" class="reset-btn">Reset</button>
+    </div>
+
+    <p class="results-count" id="results-count">
+      Showing <span data-count>{totalJobs}</span> of {totalJobs} roles
+    </p>
+
+    <div id="empty-state" class="empty-state" hidden>
+      <p>No roles match your filters.</p>
+      <button type="button" data-reset-link>Clear filters</button>
+    </div>
+
+    <div class="job-grid" id="job-grid">
+      {allListings.map((listing) => <JobCard listing={listing} />)}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    background: linear-gradient(
+      135deg,
+      var(--ocean-900) 0%,
+      var(--ocean-700) 65%,
+      var(--ocean-500) 100%
+    );
+    color: white;
+    padding: 64px 0 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 80% 20%,
+        rgba(45, 212, 191, 0.18),
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 20% 90%,
+        rgba(91, 169, 216, 0.18),
+        transparent 50%
+      );
+    pointer-events: none;
+  }
+  .hero .container {
+    position: relative;
+    z-index: 1;
+  }
+  .eyebrow {
+    color: var(--turquoise);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .hero h1 {
+    color: white;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    max-width: 850px;
+    margin: 0 0 16px;
+  }
+  .lede {
+    font-size: 1.05rem;
+    max-width: 750px;
+    color: #cfdbe8;
+    margin: 0 0 28px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    color: #cfdbe8;
+  }
+  .hero-stats strong {
+    display: block;
+    color: white;
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .listings-section {
+    padding-top: 32px;
+  }
+
+  .toolbar {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 1fr repeat(3, minmax(160px, 1fr)) auto;
+    gap: 12px;
+    align-items: end;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+
+  .toolbar input[type='search'] {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--paper-2);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .toolbar input[type='search']:focus {
+    border-color: var(--ocean-500);
+    box-shadow: 0 0 0 3px rgba(31, 111, 178, 0.15);
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .filter-group label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .filter-group select {
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--paper-2);
+    cursor: pointer;
+  }
+  .filter-group select:focus {
+    outline: none;
+    border-color: var(--ocean-500);
+    box-shadow: 0 0 0 3px rgba(31, 111, 178, 0.15);
+  }
+
+  .reset-btn {
+    padding: 9px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--ink-2);
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  .reset-btn:hover {
+    background: var(--paper-2);
+  }
+
+  .results-count {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 12px 4px 18px;
+  }
+  .results-count strong {
+    color: var(--ocean-900);
+  }
+
+  .job-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .empty-state {
+    background: var(--paper);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .empty-state button {
+    margin-top: 8px;
+    padding: 8px 16px;
+    background: var(--ocean-500);
+    color: white;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 880px) {
+    .toolbar {
+      grid-template-columns: 1fr 1fr;
+    }
+    .toolbar input[type='search'] {
+      grid-column: 1 / -1;
+    }
+    .reset-btn {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
+
+<script>
+  const search = document.getElementById('search') as HTMLInputElement;
+  const country = document.getElementById('filter-country') as HTMLSelectElement;
+  const domain = document.getElementById('filter-domain') as HTMLSelectElement;
+  const type = document.getElementById('filter-type') as HTMLSelectElement;
+  const reset = document.getElementById('reset-filters') as HTMLButtonElement;
+  const resetLink = document.querySelector('[data-reset-link]') as HTMLButtonElement;
+  const grid = document.getElementById('job-grid') as HTMLElement;
+  const empty = document.getElementById('empty-state') as HTMLElement;
+  const counter = document.querySelector('[data-count]') as HTMLElement;
+  const cards = Array.from(grid.querySelectorAll<HTMLElement>('.job-card'));
+
+  function apply() {
+    const q = search.value.trim().toLowerCase();
+    const fc = country.value;
+    const fd = domain.value;
+    const ft = type.value;
+    let visible = 0;
+
+    for (const card of cards) {
+      const haystack = card.dataset.search ?? '';
+      const matchesSearch = !q || haystack.includes(q);
+      const matchesCountry = !fc || card.dataset.country === fc;
+      const matchesDomain = !fd || card.dataset.domain === fd;
+      const matchesType = !ft || card.dataset.type === ft;
+      const visibleNow =
+        matchesSearch && matchesCountry && matchesDomain && matchesType;
+      card.hidden = !visibleNow;
+      if (visibleNow) visible++;
+    }
+
+    counter.textContent = String(visible);
+    empty.hidden = visible !== 0;
+    grid.hidden = visible === 0;
+  }
+
+  function clearAll() {
+    search.value = '';
+    country.value = '';
+    domain.value = '';
+    type.value = '';
+    apply();
+  }
+
+  [search, country, domain, type].forEach((el) =>
+    el.addEventListener('input', apply)
+  );
+  reset.addEventListener('click', clearAll);
+  resetLink?.addEventListener('click', clearAll);
+</script>

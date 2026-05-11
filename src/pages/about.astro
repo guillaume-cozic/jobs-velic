@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { companies, allListings, source, totalsByType } from '../lib/jobs';
+
+const totals = totalsByType();
+---
+
+<Layout title="About — Maritime Jobs">
+  <section class="container about">
+    <h1>About this site</h1>
+
+    <p class="lede">
+      A simple aggregator of job opportunities in maritime decarbonization and
+      wind-assisted propulsion across Europe and beyond.
+    </p>
+
+    <h2>Where the data comes from</h2>
+    <p>
+      All listings are taken from the
+      <strong>"{source.title}"</strong> review compiled by
+      <a href="https://www.linkedin.com/in/brierechristophe" target="_blank" rel="noopener">
+        Christophe Brière de La Hosseraye
+      </a> — founder of <strong>Velic Consulting</strong>, a wind propulsion
+      and maritime decarbonization advisory.
+    </p>
+    <p>
+      The May 2026 edition covers {allListings.length} openings
+      ({totals.job} permanent, {totals.internship} internships, {totals.research} research)
+      across {companies.length} companies. Each role links directly to the
+      employer's posting.
+    </p>
+
+    <h2>Who this is for</h2>
+    <ul>
+      <li>Engineers and naval architects exploring maritime decarbonization</li>
+      <li>Data scientists and ML engineers interested in routing, performance, metocean</li>
+      <li>Sales, marketing and operations roles in the wind propulsion sector</li>
+      <li>Students and post-docs looking for internships and research roles</li>
+    </ul>
+
+    <h2>Roadmap</h2>
+    <ol>
+      <li>Static snapshot (current)</li>
+      <li>Externalize data to a CMS / Airtable for monthly updates</li>
+      <li>Email digest when new roles are posted</li>
+      <li>Open submission form for companies and recruiters</li>
+      <li>Saved searches and alert subscriptions</li>
+    </ol>
+
+    <h2>Credits</h2>
+    <p class="muted">
+      Original review © {source.publisher} / {source.author}. This site is an
+      open, unofficial mirror — built to make the data more browsable. Not
+      affiliated with any of the listed companies. For each opportunity, please
+      verify the role on the company's official website.
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .about {
+    padding: 48px 0;
+    max-width: 760px;
+  }
+  .lede {
+    font-size: 1.1rem;
+    color: var(--ink-2);
+  }
+  h2 {
+    margin-top: 32px;
+  }
+  ul,
+  ol {
+    line-height: 1.8;
+  }
+</style>

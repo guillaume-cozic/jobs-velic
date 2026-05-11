@@ -1,0 +1,172 @@
+---
+import type { JobListing } from '../lib/jobs';
+import { countryFlag, countryLabel, typeLabel } from '../lib/jobs';
+import { url } from '../lib/url';
+
+interface Props {
+  listing: JobListing;
+}
+
+const { listing } = Astro.props;
+const { company } = listing;
+---
+
+<article
+  class="job-card"
+  data-country={listing.effectiveCountry}
+  data-domain={listing.domain}
+  data-type={listing.type}
+  data-search={`${company.name} ${listing.title} ${listing.domain} ${company.category} ${company.description} ${listing.effectiveCity}`.toLowerCase()}
+>
+  <div class="job-card-head">
+    <span class="location" title={countryLabel(listing.effectiveCountry)}>
+      <span class="flag">{countryFlag(listing.effectiveCountry)}</span>
+      <span class="city">{listing.effectiveCity}</span>
+    </span>
+    <span class={`badge badge-${listing.type}`}>{typeLabel(listing.type)}</span>
+  </div>
+
+  <h3 class="job-title">{listing.title}</h3>
+
+  <a href={url(`/company/${company.slug}/`)} class="company-link">
+    {company.name}
+  </a>
+
+  <p class="company-desc">{company.description}</p>
+
+  <div class="job-meta">
+    <span class="chip">{listing.domain}</span>
+    <span class="chip chip-soft">{company.category}</span>
+  </div>
+
+  <a
+    class="apply-btn"
+    href={listing.effectiveApplyUrl}
+    target="_blank"
+    rel="noopener"
+    aria-label={`Apply to ${listing.title} at ${company.name}`}
+  >
+    Apply ↗
+  </a>
+</article>
+
+<style>
+  .job-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .job-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(6, 32, 58, 0.08),
+      0 18px 40px rgba(6, 32, 58, 0.1);
+  }
+
+  .job-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .location {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink-2);
+    font-size: 0.85rem;
+  }
+  .flag {
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+  .city {
+    font-weight: 500;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .badge-job {
+    background: rgba(45, 212, 191, 0.15);
+    color: #0d7869;
+  }
+  .badge-internship {
+    background: rgba(31, 111, 178, 0.12);
+    color: var(--ocean-700);
+  }
+  .badge-research {
+    background: rgba(168, 85, 247, 0.12);
+    color: #6d28d9;
+  }
+
+  .job-title {
+    font-size: 1.02rem;
+    margin: 0;
+    color: var(--ocean-900);
+    line-height: 1.3;
+  }
+
+  .company-link {
+    font-weight: 600;
+    color: var(--ocean-700);
+    font-size: 0.95rem;
+  }
+
+  .company-desc {
+    color: var(--ink-2);
+    font-size: 0.85rem;
+    margin: 4px 0 8px;
+    flex-grow: 1;
+  }
+
+  .job-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .chip {
+    font-size: 0.74rem;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--ocean-500);
+    color: white;
+    font-weight: 500;
+  }
+  .chip-soft {
+    background: var(--paper-2);
+    color: var(--ink-2);
+    border: 1px solid var(--border);
+  }
+
+  .apply-btn {
+    margin-top: 10px;
+    padding: 8px 14px;
+    background: var(--ocean-900);
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.15s;
+  }
+  .apply-btn:hover {
+    background: var(--ocean-700);
+    text-decoration: none;
+  }
+</style>
