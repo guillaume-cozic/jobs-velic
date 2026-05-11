@@ -7,7 +7,7 @@ Decarbonization & Wind Propulsion"** by Christophe Brière de La Hosseraye
 121 openings across 42 companies — wind sails, hydrogen propulsion,
 performance routing, AI, naval architecture.
 
-🌐 **Live site:** https://guillaume-cozic.github.io/velic-consulting-jobs/
+🌐 **Live site:** https://guillaume-cozic.github.io/jobs-velic/
 
 ## Stack
 
