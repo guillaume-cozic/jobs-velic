@@ -1,5 +1,6 @@
 ---
 import { url } from '../lib/url';
+import { source } from '../lib/jobs';
 
 interface Props {
   title?: string;
@@ -7,9 +8,12 @@ interface Props {
 }
 
 const {
-  title = 'Maritime Jobs — Decarbonization & Wind Propulsion',
-  description = 'Job opportunities in maritime decarbonization, wind-assisted propulsion and ocean tech across Europe and beyond.',
+  title = 'Jobs Velic — Careers under sail',
+  description = 'Job openings in wind-assisted propulsion, sail shipping and maritime decarbonization, from the Velic Consulting review.',
 } = Astro.props;
+
+const path = Astro.url.pathname;
+const isHome = path === url('/') || path === url('');
 ---
 
 <!doctype html>
@@ -19,21 +23,25 @@ const {
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
   <body>
     <header class="site-header">
-      <div class="container header-inner">
-        <a href={url('/')} class="logo">
-          <span class="logo-mark">⚓</span>
-          <span class="logo-text">Maritime Jobs</span>
-        </a>
-        <nav>
-          <a href={url('/')}>Listings</a>
-          <a href={url('/about')}>About</a>
-        </nav>
-      </div>
+      <nav class="container nav" aria-label="Main">
+        <a href={url('/')} class="logo">Jobs Velic</a>
+        <div class="nav-links">
+          <a href={isHome ? '#search' : url('/#search')}>Search</a>
+          <a href={isHome ? '#roles' : url('/#roles')}>Open roles</a>
+          <a href={url('/about/')} aria-current={path.startsWith(url('/about')) ? 'page' : undefined}>About</a>
+        </div>
+      </nav>
     </header>
 
     <main>
@@ -41,142 +49,234 @@ const {
     </main>
 
     <footer class="site-footer">
-      <div class="container">
-        <p>
-          Data from the May 2026 review <strong>"Job Opportunities — Maritime
-          Decarbonization & Wind Propulsion"</strong> by
-          <a href="https://www.linkedin.com/in/brierechristophe" target="_blank" rel="noopener">
-            Christophe Brière de La Hosseraye</a> —
-          <em>Velic Consulting</em>.
-        </p>
-        <p class="muted">
-          This is an unofficial aggregation. Always verify openings on the company's own site.
-        </p>
+      <div class="container footer-inner">
+        <span>
+          Data © {source.author} /
+          <a href="https://www.linkedin.com/in/brierechristophe" target="_blank" rel="noopener">{source.publisher}</a>
+          · {source.edition} review
+        </span>
       </div>
     </footer>
 
     <style is:global>
       :root {
-        --ocean-900: #06203a;
-        --ocean-800: #0a2c4d;
-        --ocean-700: #0f3a66;
-        --ocean-500: #1f6fb2;
-        --ocean-300: #5ba9d8;
-        --turquoise: #2dd4bf;
-        --turquoise-dark: #14b8a6;
-        --sand: #f4efe6;
+        --navy: #0f2434;
+        --navy-2: #16324a;
+        --navy-3: #0c1e2c;
+        --line-dark: #2b4b64;
+        --line-dark-2: #213d53;
+        --sky: #9ec3d9;
+        --mist: #dce8ef;
+        --ground: #eef1f3;
         --paper: #ffffff;
-        --paper-2: #f7faff;
-        --ink: #0c1b2e;
-        --ink-2: #3c4f66;
-        --muted: #6b7a90;
-        --border: #d9e3ef;
-        --shadow: 0 2px 6px rgba(6, 32, 58, 0.05),
-          0 10px 25px rgba(6, 32, 58, 0.06);
+        --ink: #0f2434;
+        --ink-2: #2e3f4b;
+        --ink-3: #3c4d59;
+        --muted: #52636f;
+        --line: #cdd6dc;
+        --line-2: #d5dde2;
+        --field: #b9c4cc;
+        --chip: #dce6ec;
+        --accent: #c8471b;
+        --accent-text: #b23f16;
+        --accent-on-dark: #f2a27e;
+        --intern-bg: #fbe3d6;
+        --intern-ink: #8a2f0e;
+        --research-bg: #e3e8f7;
+        --research-ink: #2a3a7a;
+        --display: 'Archivo', system-ui, sans-serif;
+        --mono: 'IBM Plex Mono', ui-monospace, monospace;
       }
 
-      * {
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
       }
 
-      html,
-      body {
-        margin: 0;
-        padding: 0;
+      [hidden] {
+        display: none !important;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
       }
 
       body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI',
-          Roboto, 'Helvetica Neue', Arial, sans-serif;
+        margin: 0;
+        font-family: var(--display);
         color: var(--ink);
-        background: var(--paper-2);
-        line-height: 1.55;
+        background: var(--ground);
+        line-height: 1.5;
         font-size: 16px;
       }
 
       a {
-        color: var(--ocean-500);
-        text-decoration: none;
+        color: var(--ink);
       }
       a:hover {
-        text-decoration: underline;
-      }
-
-      .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-
-      .muted {
-        color: var(--muted);
-      }
-
-      .site-header {
-        background: var(--paper);
-        border-bottom: 1px solid var(--border);
-        position: sticky;
-        top: 0;
-        z-index: 10;
-      }
-      .header-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 16px;
-        padding-bottom: 16px;
-      }
-      .logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--ocean-900);
-        font-weight: 700;
-        font-size: 1.05rem;
-        text-decoration: none;
-      }
-      .logo-mark {
-        font-size: 1.4rem;
-      }
-      .site-header nav {
-        display: flex;
-        gap: 24px;
-      }
-      .site-header nav a {
-        color: var(--ink-2);
-        font-weight: 500;
-      }
-
-      .site-footer {
-        margin-top: 80px;
-        padding: 32px 0 48px;
-        background: var(--ocean-900);
-        color: #cfdbe8;
-        font-size: 0.9rem;
-      }
-      .site-footer p {
-        margin: 4px 0;
-      }
-      .site-footer a {
-        color: #2dd4bf;
-      }
-      .site-footer .muted {
-        color: #8aa3bf;
-      }
-
-      h1,
-      h2,
-      h3 {
-        color: var(--ocean-900);
-        line-height: 1.2;
-        margin: 0 0 12px;
+        color: var(--accent-text);
       }
 
       button,
       input,
       select {
         font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        font-family: var(--mono);
+        font-size: 14px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent-text);
+      }
+
+      .display {
+        margin: 0;
+        font-weight: 850;
+        font-stretch: 112%;
+        letter-spacing: -0.02em;
+        line-height: 0.95;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 56px;
+        padding: 0 28px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 17px;
+        text-decoration: none;
+        border: 2px solid transparent;
+      }
+      .pill-accent {
+        background: var(--accent);
+        color: #fff;
+      }
+      .pill-accent:hover {
+        background: #a93b16;
+        color: #fff;
+      }
+      .pill-outline {
+        border-color: var(--ink);
+        background: transparent;
+        color: var(--ink);
+      }
+      .pill-outline:hover {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 1.2;
+      }
+      .tag-soft {
+        background: var(--chip);
+        font-weight: 600;
+      }
+      .tag-line {
+        border: 1px solid var(--field);
+      }
+      .tag-job {
+        background: var(--navy);
+        color: #fff;
+        font-weight: 600;
+      }
+      .tag-internship {
+        background: var(--intern-bg);
+        color: var(--intern-ink);
+        font-weight: 600;
+      }
+      .tag-research {
+        background: var(--research-bg);
+        color: var(--research-ink);
+        font-weight: 600;
+      }
+
+      .site-header {
+        background: var(--navy);
+        color: #fff;
+      }
+      .nav {
+        padding-top: 24px;
+        padding-bottom: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .logo {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 22px;
+        font-stretch: 115%;
+      }
+      .logo:hover {
+        color: #fff;
+      }
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 28px;
+        font-size: 16px;
+      }
+      .nav-links a {
+        color: var(--mist);
+        text-decoration: none;
+      }
+      .nav-links a:hover,
+      .nav-links a[aria-current='page'] {
+        color: #fff;
+        text-decoration: underline;
+        text-underline-offset: 6px;
+      }
+
+      .site-footer {
+        background: var(--navy);
+        color: var(--sky);
+        font-family: var(--mono);
+        font-size: 13px;
+      }
+      .footer-inner {
+        padding-top: 32px;
+        padding-bottom: 32px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .site-footer a {
+        color: var(--mist);
       }
     </style>
   </body>

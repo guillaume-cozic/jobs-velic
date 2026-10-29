@@ -5,72 +5,84 @@ import { companies, allListings, source, totalsByType } from '../lib/jobs';
 const totals = totalsByType();
 ---
 
-<Layout title="About — Maritime Jobs">
-  <section class="container about">
-    <h1>About this site</h1>
-
-    <p class="lede">
-      A simple aggregator of job opportunities in maritime decarbonization and
-      wind-assisted propulsion across Europe and beyond.
-    </p>
-
-    <h2>Where the data comes from</h2>
-    <p>
-      All listings are taken from the
-      <strong>"{source.title}"</strong> review compiled by
-      <a href="https://www.linkedin.com/in/brierechristophe" target="_blank" rel="noopener">
-        Christophe Brière de La Hosseraye
-      </a> — founder of <strong>Velic Consulting</strong>, a wind propulsion
-      and maritime decarbonization advisory.
-    </p>
-    <p>
-      The May 2026 edition covers {allListings.length} openings
-      ({totals.job} permanent, {totals.internship} internships, {totals.research} research)
-      across {companies.length} companies. Each role links directly to the
-      employer's posting.
-    </p>
-
-    <h2>Who this is for</h2>
-    <ul>
-      <li>Engineers and naval architects exploring maritime decarbonization</li>
-      <li>Data scientists and ML engineers interested in routing, performance, metocean</li>
-      <li>Sales, marketing and operations roles in the wind propulsion sector</li>
-      <li>Students and post-docs looking for internships and research roles</li>
-    </ul>
-
-    <h2>Roadmap</h2>
-    <ol>
-      <li>Static snapshot (current)</li>
-      <li>Externalize data to a CMS / Airtable for monthly updates</li>
-      <li>Email digest when new roles are posted</li>
-      <li>Open submission form for companies and recruiters</li>
-      <li>Saved searches and alert subscriptions</li>
-    </ol>
-
-    <h2>Credits</h2>
-    <p class="muted">
-      Original review © {source.publisher} / {source.author}. This site is an
-      open, unofficial mirror — built to make the data more browsable. Not
-      affiliated with any of the listed companies. For each opportunity, please
-      verify the role on the company's official website.
-    </p>
+<Layout title="About — Jobs Velic">
+  <section class="about-hero">
+    <div class="container">
+      <p class="eyebrow on-dark">Ship's papers</p>
+      <h1 class="display about-title">A browsable mirror of the {source.publisher} review</h1>
+    </div>
   </section>
+
+  <div class="container about">
+    <div class="about-text">
+      <h2>Where the data comes from</h2>
+      <p>
+        All listings come from <strong>“{source.title}”</strong> ({source.edition}), compiled by
+        <a href="https://www.linkedin.com/in/brierechristophe" target="_blank" rel="noopener">{source.author}</a>,
+        founder of <strong>{source.publisher}</strong>, a wind propulsion and maritime decarbonization advisory.
+      </p>
+      <p>
+        This edition lists {allListings.length} roles ({totals.job} full-time, {totals.internship} internships and
+        work-study, {totals.research} research) across {companies.length} organisations. Each role links to the
+        posting or careers page given in the review.
+      </p>
+
+      <h2>Who this is for</h2>
+      <ul>
+        <li>Engineers and naval architects moving into wind-assisted propulsion</li>
+        <li>Data scientists working on routing, vessel performance and metocean</li>
+        <li>Sales, marketing and operations people in the wind propulsion sector</li>
+        <li>Students and post-docs looking for internships, theses and research roles</li>
+      </ul>
+
+      <h2>Credits</h2>
+      <p class="muted">
+        Original review © {source.publisher} / {source.author}. This site is an open, unofficial mirror built to make
+        the listings easier to search. It is not affiliated with any of the listed companies. Always confirm a role on
+        the company's official website before applying.
+      </p>
+    </div>
+  </div>
 </Layout>
 
 <style>
-  .about {
-    padding: 48px 0;
-    max-width: 760px;
+  .about-hero {
+    background: var(--navy);
+    color: #fff;
+    padding: 32px 0 80px;
   }
-  .lede {
-    font-size: 1.1rem;
+  .eyebrow.on-dark {
+    color: var(--sky);
+    margin-bottom: 20px;
+  }
+  .about-title {
+    max-width: 900px;
+    font-size: clamp(40px, 5vw, 72px);
+  }
+  .about {
+    padding-top: 72px;
+    padding-bottom: 112px;
+  }
+  .about-text {
+    max-width: 760px;
+    font-size: 18px;
+    line-height: 1.65;
     color: var(--ink-2);
   }
-  h2 {
-    margin-top: 32px;
+  .about-text h2 {
+    margin: 48px 0 12px;
+    font-size: 30px;
+    font-weight: 850;
+    font-stretch: 112%;
+    color: var(--ink);
   }
-  ul,
-  ol {
-    line-height: 1.8;
+  .about-text h2:first-child {
+    margin-top: 0;
+  }
+  .about-text ul {
+    padding-left: 22px;
+  }
+  .muted {
+    color: var(--muted);
   }
 </style>

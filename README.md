@@ -1,11 +1,11 @@
 # Velic Consulting Jobs
 
-A browsable mirror of the May 2026 review **"Job Opportunities — Maritime
+A browsable mirror of the October 2026 review **"Job Opportunities — Maritime
 Decarbonization & Wind Propulsion"** by Christophe Brière de La Hosseraye
 ([Velic Consulting](https://www.linkedin.com/in/brierechristophe)).
 
-121 openings across 42 companies — wind sails, hydrogen propulsion,
-performance routing, AI, naval architecture.
+115 openings across 36 organisations — wind propulsion, sail shipping,
+routing, hydrogen, naval architecture — on a hiring map with search.
 
 🌐 **Live site:** https://guillaume-cozic.github.io/jobs-velic/
 
@@ -13,7 +13,10 @@ performance routing, AI, naval architecture.
 
 - [Astro 4](https://astro.build) — static site generator
 - Data file: `src/data/jobs.json`
-- Zero runtime, deployed to GitHub Pages
+- Hiring map rendered at build time (`src/lib/map.ts`) from Natural Earth
+  coastlines (`world-atlas`) with `d3-geo`; a city must be listed in `PORTS`
+  there to get a pin, otherwise it shows under "Beyond the frame"
+- Vanilla JS filtering, deployed to GitHub Pages
 
 ## Local development
 

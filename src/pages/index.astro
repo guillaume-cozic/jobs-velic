@@ -1,334 +1,794 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import JobCard from '../components/JobCard.astro';
+import { url } from '../lib/url';
 import {
   allListings,
   companies,
   source,
-  uniqueCountries,
-  uniqueDomains,
-  uniqueTypes,
-  countryFlag,
-  countryLabel,
+  SECTORS,
+  DOMAINS,
   typeLabel,
-  totalsByType,
+  countryLabel,
+  uniqueCountries,
 } from '../lib/jobs';
+import { MAP_WIDTH, MAP_HEIGHT, mapPaths, pins, offMap, onMapCount, portOf } from '../lib/map';
 
-const countries = uniqueCountries();
-const domains = uniqueDomains();
-const types = uniqueTypes();
-const totalJobs = allListings.length;
-const totalCompanies = companies.length;
-const totals = totalsByType();
+const total = allListings.length;
+const advertised = source.totalAdvertised;
+const countryCount = uniqueCountries().length;
+const topPorts = pins.slice(0, 5);
+const domains = DOMAINS.filter((d) => allListings.some((l) => l.domain === d));
+
+const listingPort = (city: string) => portOf(city) ?? city;
+const portOptions = [
+  ...pins.map((p) => ({ value: p.port, total: p.total })),
+  ...offMap.map((o) => ({ value: o.city, total: o.total })),
+].sort((a, b) => a.value.localeCompare(b.value));
+
+const pinSize = (n: number) => Math.round(12 + Math.sqrt(n) * 7);
+const PAGE = 20;
 ---
 
 <Layout>
-  <section class="hero">
-    <div class="container">
-      <p class="eyebrow">{source.title.includes('May 2026') ? 'May 2026' : ''} · Maritime decarbonization</p>
-      <h1>Jobs in maritime decarbonization & wind propulsion</h1>
-      <p class="lede">
-        A curated snapshot of {totalJobs} open positions across
-        {totalCompanies} companies — wind sails, hydrogen, performance routing,
-        AI, naval architecture. A real industrial sector is emerging.
-      </p>
-      <div class="hero-stats">
-        <div><strong>{totals.job}</strong> open jobs</div>
-        <div><strong>{totals.internship}</strong> internships</div>
-        <div><strong>{totalCompanies}</strong> companies</div>
-        <div><strong>{countries.length}</strong> countries</div>
+  <!-- 1. Map -->
+  <section class="map-section" aria-labelledby="hero-title">
+    <div class="container map-grid">
+      <div class="map-intro">
+        <p class="eyebrow on-dark">{source.edition} · {advertised} openings · {companies.length} companies</p>
+        <h1 id="hero-title" class="display hero-title">Cargo under sail.<br />Careers with the wind.</h1>
+        <p class="hero-lede">
+          {onMapCount} of the {total} listed roles sit between the Bay of Biscay and the Baltic.
+          Pick a port on the map to see who is hiring there.
+        </p>
+        <ol class="top-ports" aria-label="Ports with the most openings">
+          {
+            topPorts.map((p, i) => (
+              <li>
+                <button type="button" class="top-port" data-port={p.port} aria-pressed="false">
+                  <span class="top-rank">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="top-city">{p.port}</span>
+                  <span class="top-n" data-top-count={p.port}>{p.total}</span>
+                </button>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="map-col">
+        <div class="map" style={`aspect-ratio: ${MAP_WIDTH} / ${MAP_HEIGHT}`}>
+          <svg viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`} aria-hidden="true" class="map-svg">
+            <path d={mapPaths.graticule} fill="none" stroke="#1e3b52" stroke-width="1" />
+            <path d={mapPaths.land} fill="#1b3a52" />
+            <path d={mapPaths.borders} fill="none" stroke="#0f2434" stroke-width="1.2" />
+          </svg>
+          {
+            [...pins].reverse().map((p) => (
+              <button
+                type="button"
+                class:list={['pin', { 'pin-major': p.total >= 5 }]}
+                data-port={p.port}
+                aria-pressed="false"
+                aria-label={`${p.port}, ${p.total} ${p.total === 1 ? 'opening' : 'openings'}`}
+                style={`left: ${p.x}%; top: ${p.y}%; --d: ${pinSize(p.total)}px`}
+              >
+                <span class={`pin-label pin-label-${p.side}`}>
+                  {p.port} <span class="pin-count" data-pin-count>{p.total}</span>
+                </span>
+              </button>
+            ))
+          }
+          <p class="map-hint">Tap a port to filter</p>
+        </div>
+        <div class="map-foot">
+          <span>
+            Beyond the frame · {offMap.map((o) => `${o.city} ${o.total}`).join(' · ')}
+          </span>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="container listings-section">
-    <div class="toolbar">
-      <input
-        type="search"
-        id="search"
-        placeholder="Search roles, companies, cities, domains…"
-        autocomplete="off"
-      />
+  <!-- 2. Search form -->
+  <section id="search" class="container search-section" aria-label="Search roles">
+    <form class="search-form" role="search" id="search-form">
+      <div class="search-row">
+        <label class="field field-grow">
+          <span class="field-label">Search all roles</span>
+          <input
+            type="search"
+            id="q"
+            name="q"
+            autocomplete="off"
+            placeholder="Role, company, skill — e.g. CFD, kite, data"
+            class="input input-lg"
+          />
+        </label>
+        <a href="#roles" class="pill pill-accent show-btn">
+          Show <span data-total>{total}</span> <span data-total-word>roles</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
+        </a>
+      </div>
 
-      <div class="filter-group">
-        <label for="filter-country">Country</label>
-        <select id="filter-country">
-          <option value="">All</option>
+      <div class="search-grid">
+        <label class="field">
+          <span class="field-label">Port</span>
+          <select id="port" name="port" class="input">
+            <option value="">All ports</option>
+            {portOptions.map((o) => <option value={o.value}>{o.value} ({o.total})</option>)}
+          </select>
+        </label>
+        <label class="field">
+          <span class="field-label">Sector</span>
+          <select id="sector" name="sector" class="input">
+            <option value="">All sectors</option>
+            {SECTORS.map((s) => <option value={s.id}>{s.label}</option>)}
+          </select>
+        </label>
+        <label class="field">
+          <span class="field-label">Domain</span>
+          <select id="domain" name="domain" class="input">
+            <option value="">All domains</option>
+            {domains.map((d) => <option value={d}>{d}</option>)}
+          </select>
+        </label>
+      </div>
+
+      <div class="search-foot">
+        <fieldset class="contracts">
+          <legend class="field-label">Contract</legend>
           {
-            countries.map((c) => (
-              <option value={c}>
-                {countryFlag(c)} {countryLabel(c)}
-              </option>
+            [
+              ['', 'Any'],
+              ['job', 'Full-time'],
+              ['internship', 'Internship'],
+              ['research', 'Research'],
+            ].map(([value, label]) => (
+              <button type="button" class="chip" data-contract={value} aria-pressed={value === '' ? 'true' : 'false'}>
+                {label} <span class="chip-n" data-contract-count={value} />
+              </button>
             ))
           }
-        </select>
+        </fieldset>
+        <div class="search-actions">
+          <span class="summary" data-summary>No filters · all {total} roles</span>
+          <button type="reset" class="pill pill-outline reset-btn">Reset</button>
+        </div>
       </div>
+    </form>
+  </section>
 
-      <div class="filter-group">
-        <label for="filter-domain">Domain</label>
-        <select id="filter-domain">
-          <option value="">All</option>
-          {domains.map((d) => <option value={d}>{d}</option>)}
-        </select>
+  <!-- 3. Open roles -->
+  <section id="roles" class="container roles-section" aria-labelledby="roles-title">
+    <div class="roles-head">
+      <div>
+        <p class="eyebrow">Open roles · <span data-scope>All ports</span></p>
+        <h2 id="roles-title" class="display roles-title">
+          <span data-total>{total}</span> <span data-total-word>roles</span>
+        </h2>
       </div>
-
-      <div class="filter-group">
-        <label for="filter-type">Type</label>
-        <select id="filter-type">
-          <option value="">All</option>
-          {types.map((t) => <option value={t}>{typeLabel(t)}</option>)}
-        </select>
-      </div>
-
-      <button id="reset-filters" type="button" class="reset-btn">Reset</button>
+      <button type="button" class="pill pill-outline clear-port" hidden>
+        <span data-scope>All ports</span> ×
+      </button>
     </div>
 
-    <p class="results-count" id="results-count">
-      Showing <span data-count>{totalJobs}</span> of {totalJobs} roles
-    </p>
-
-    <div id="empty-state" class="empty-state" hidden>
-      <p>No roles match your filters.</p>
-      <button type="button" data-reset-link>Clear filters</button>
+    <div class="roles-cols" aria-hidden="true">
+      <span>Role · Company</span>
+      <span>Sector · Domain · Contract</span>
     </div>
 
-    <div class="job-grid" id="job-grid">
-      {allListings.map((listing) => <JobCard listing={listing} />)}
+    <ol class="roles" id="roles-list">
+      {
+        allListings.map((l, i) => (
+          <li
+            class="role"
+            data-port={listingPort(l.effectiveCity)}
+            data-sector={l.sector}
+            data-domain={l.domain}
+            data-type={l.type}
+            data-search={`${l.title} ${l.company.name} ${l.effectiveCity} ${countryLabel(l.effectiveCountry)} ${l.company.category} ${l.domain} ${l.note ?? ''}`.toLowerCase()}
+            hidden={i >= PAGE}
+          >
+            <span class="role-no">No.{String(i + 1).padStart(3, '0')}</span>
+            <div class="role-main">
+              <a class="role-title" href={url(`/company/${l.company.slug}/`)}>{l.title}</a>
+              <div class="role-sub">
+                {l.company.name} · {l.effectiveCity}, {l.effectiveCountry}
+                {l.note && <span class="role-note"> · {l.note}</span>}
+              </div>
+            </div>
+            <div class="role-tags">
+              <span class="tag tag-soft">{l.company.category}</span>
+              <span class="tag tag-line">{l.domain}</span>
+              <span class={`tag tag-${l.type}`}>{typeLabel(l.type)}</span>
+            </div>
+            <a
+              class="apply"
+              href={l.effectiveApplyUrl}
+              target="_blank"
+              rel="noopener"
+              aria-label={`Apply: ${l.title} at ${l.company.name}`}
+            >
+              Apply
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="empty" id="empty" hidden>
+      <p class="empty-title">Becalmed — no roles match.</p>
+      <button type="button" class="pill pill-outline" data-reset>Clear all filters</button>
+    </div>
+
+    <div class="more-wrap">
+      <button type="button" class="pill more-btn" id="more" hidden>
+        Show <span data-more-count>20</span> more · <span data-left>0</span> left
+      </button>
     </div>
   </section>
 </Layout>
 
 <style>
-  .hero {
-    background: linear-gradient(
-      135deg,
-      var(--ocean-900) 0%,
-      var(--ocean-700) 65%,
-      var(--ocean-500) 100%
-    );
-    color: white;
-    padding: 64px 0 56px;
-    position: relative;
-    overflow: hidden;
+  .map-section {
+    background: var(--navy);
+    color: #fff;
   }
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(
-        circle at 80% 20%,
-        rgba(45, 212, 191, 0.18),
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 20% 90%,
-        rgba(91, 169, 216, 0.18),
-        transparent 50%
-      );
-    pointer-events: none;
-  }
-  .hero .container {
-    position: relative;
-    z-index: 1;
-  }
-  .eyebrow {
-    color: var(--turquoise);
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin: 0 0 12px;
-  }
-  .hero h1 {
-    color: white;
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    max-width: 850px;
-    margin: 0 0 16px;
-  }
-  .lede {
-    font-size: 1.05rem;
-    max-width: 750px;
-    color: #cfdbe8;
-    margin: 0 0 28px;
-  }
-  .hero-stats {
-    display: flex;
-    gap: 32px;
-    flex-wrap: wrap;
-    color: #cfdbe8;
-  }
-  .hero-stats strong {
-    display: block;
-    color: white;
-    font-size: 1.6rem;
-    line-height: 1;
-  }
-
-  .listings-section {
+  .map-grid {
     padding-top: 32px;
+    padding-bottom: 136px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
   }
-
-  .toolbar {
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 16px;
-    display: grid;
-    grid-template-columns: 1fr repeat(3, minmax(160px, 1fr)) auto;
-    gap: 12px;
-    align-items: end;
-    box-shadow: var(--shadow);
-    margin-bottom: 16px;
-  }
-
-  .toolbar input[type='search'] {
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--paper-2);
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-  .toolbar input[type='search']:focus {
-    border-color: var(--ocean-500);
-    box-shadow: 0 0 0 3px rgba(31, 111, 178, 0.15);
-  }
-
-  .filter-group {
+  .map-intro {
+    flex: 1 1 380px;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 4px;
   }
-  .filter-group label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--muted);
-    font-weight: 600;
+  .eyebrow.on-dark {
+    color: var(--sky);
+    margin-bottom: 24px;
   }
-  .filter-group select {
-    padding: 9px 12px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--paper-2);
-    cursor: pointer;
+  .hero-title {
+    font-size: clamp(40px, 3.9vw, 58px);
   }
-  .filter-group select:focus {
-    outline: none;
-    border-color: var(--ocean-500);
-    box-shadow: 0 0 0 3px rgba(31, 111, 178, 0.15);
+  .hero-lede {
+    margin: 28px 0 0;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--mist);
   }
-
-  .reset-btn {
-    padding: 9px 16px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    cursor: pointer;
-    color: var(--ink-2);
-    font-weight: 500;
-    transition: background 0.15s;
+  .top-ports {
+    list-style: none;
+    margin: 36px 0 0;
+    padding: 0;
+    border-top: 1px solid var(--line-dark);
   }
-  .reset-btn:hover {
-    background: var(--paper-2);
+  .top-ports li {
+    border-bottom: 1px solid var(--line-dark);
   }
-
-  .results-count {
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin: 12px 4px 18px;
-  }
-  .results-count strong {
-    color: var(--ocean-900);
-  }
-
-  .job-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-  }
-
-  .empty-state {
-    background: var(--paper);
-    border: 1px dashed var(--border);
-    border-radius: 12px;
-    padding: 40px;
-    text-align: center;
-    color: var(--muted);
-    margin-bottom: 16px;
-  }
-  .empty-state button {
-    margin-top: 8px;
-    padding: 8px 16px;
-    background: var(--ocean-500);
-    color: white;
+  .top-port {
+    width: 100%;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
     border: 0;
     border-radius: 8px;
-    cursor: pointer;
+    color: #fff;
+    background: transparent;
+    text-align: left;
+  }
+  .top-port:hover,
+  .top-port[aria-pressed='true'] {
+    background: var(--navy-2);
+  }
+  .top-rank {
+    width: 32px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--sky);
+  }
+  .top-city {
+    flex: 1 1 auto;
+    font-size: 19px;
+    font-weight: 700;
+  }
+  .top-n {
+    font-size: 28px;
+    font-weight: 850;
+    font-stretch: 112%;
   }
 
-  @media (max-width: 880px) {
-    .toolbar {
-      grid-template-columns: 1fr 1fr;
-    }
-    .toolbar input[type='search'] {
-      grid-column: 1 / -1;
-    }
-    .reset-btn {
-      grid-column: 1 / -1;
-    }
+  .map-col {
+    flex: 999 1 600px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .map {
+    position: relative;
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--navy-3);
+    border: 1px solid var(--line-dark-2);
+  }
+  .map-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .map-hint {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sky);
+    background: var(--navy);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--line-dark);
+  }
+  .pin {
+    position: absolute;
+    width: var(--d);
+    height: var(--d);
+    transform: translate(-50%, -50%);
+    padding: 0;
+    border-radius: 999px;
+    background: var(--accent);
+    border: 2px solid var(--navy);
+    z-index: 1;
+    transition: background-color 0.15s;
+  }
+  .pin:hover {
+    z-index: 4;
+  }
+  .pin.is-dim {
+    background: var(--line-dark);
+  }
+  .pin[aria-pressed='true'] {
+    border: 3px solid #fff;
+    z-index: 3;
+  }
+  .pin-label {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: var(--navy);
+    padding: 3px 8px;
+    border-radius: 6px;
+    pointer-events: none;
+  }
+  .pin-label-left {
+    right: calc(100% + 10px);
+  }
+  .pin-label-right {
+    left: calc(100% + 10px);
+  }
+  .pin-count {
+    color: var(--sky);
+  }
+  .pin-major:not(.is-dim) .pin-label,
+  .pin[aria-pressed='true'] .pin-label,
+  .pin:hover .pin-label,
+  .pin:focus-visible .pin-label {
+    display: block;
+  }
+  .map-foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--sky);
+  }
+
+  .search-section {
+    margin-top: -88px;
+    position: relative;
+  }
+  .search-form {
+    background: var(--paper);
+    border: 1px solid var(--line-2);
+    border-radius: 24px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .search-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+  .field-grow {
+    flex: 999 1 420px;
+  }
+  .field-label {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .input {
+    height: 56px;
+    padding: 0 16px;
+    border: 2px solid var(--field);
+    border-radius: 14px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 17px;
+  }
+  .input:focus {
+    border-color: var(--navy);
+    outline: none;
+  }
+  .input-lg {
+    height: 64px;
+    padding: 0 22px;
+    font-size: 19px;
+  }
+  .show-btn {
+    flex: 0 0 auto;
+    min-height: 64px;
+    border-radius: 14px;
+  }
+  .search-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .search-foot {
+    padding-top: 20px;
+    border-top: 1px solid var(--line-2);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .contracts {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+  .contracts legend {
+    float: left;
+    margin-right: 8px;
+  }
+  .chip {
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    border: 2px solid var(--field);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .chip[aria-pressed='true'] {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+  }
+  .chip-n {
+    font-family: var(--mono);
+    font-size: 13px;
+    opacity: 0.8;
+  }
+  .search-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+  .summary {
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .reset-btn {
+    min-height: 48px;
+    padding: 0 20px;
+    font-size: 16px;
+  }
+
+  .roles-section {
+    padding-top: 88px;
+    padding-bottom: 112px;
+  }
+  .roles-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px 32px;
+  }
+  .roles-title {
+    font-size: clamp(36px, 4vw, 56px);
+  }
+  .clear-port {
+    min-height: 48px;
+    padding: 0 20px;
+    font-size: 16px;
+    border-color: var(--field);
+    background: var(--paper);
+  }
+  .roles-cols {
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .roles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .role {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 28px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .role[hidden] {
+    display: none;
+  }
+  .role-no {
+    width: 56px;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .role-main {
+    flex: 999 1 320px;
+    min-width: 0;
+  }
+  .role-title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-decoration: none;
+  }
+  .role-title:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .role-sub {
+    margin-top: 6px;
+    font-size: 16px;
+    color: var(--ink-3);
+  }
+  .role-note {
+    color: var(--muted);
+  }
+  .role-tags {
+    flex: 1 1 300px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .apply {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .apply:hover {
+    background: var(--ink);
+    color: #fff;
+  }
+  .empty {
+    padding: 64px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .empty-title {
+    margin: 0 0 20px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .more-wrap {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  .more-btn {
+    background: var(--navy);
+    color: #fff;
+  }
+  .more-btn:hover {
+    background: var(--navy-2);
   }
 </style>
 
 <script>
-  const search = document.getElementById('search') as HTMLInputElement;
-  const country = document.getElementById('filter-country') as HTMLSelectElement;
-  const domain = document.getElementById('filter-domain') as HTMLSelectElement;
-  const type = document.getElementById('filter-type') as HTMLSelectElement;
-  const reset = document.getElementById('reset-filters') as HTMLButtonElement;
-  const resetLink = document.querySelector('[data-reset-link]') as HTMLButtonElement;
-  const grid = document.getElementById('job-grid') as HTMLElement;
-  const empty = document.getElementById('empty-state') as HTMLElement;
-  const counter = document.querySelector('[data-count]') as HTMLElement;
-  const cards = Array.from(grid.querySelectorAll<HTMLElement>('.job-card'));
+  const PAGE = 20;
+  const TOTAL_ALL = document.querySelectorAll('.role').length;
 
-  function apply() {
-    const q = search.value.trim().toLowerCase();
-    const fc = country.value;
-    const fd = domain.value;
-    const ft = type.value;
-    let visible = 0;
+  const form = document.getElementById('search-form') as HTMLFormElement;
+  const q = document.getElementById('q') as HTMLInputElement;
+  const portSel = document.getElementById('port') as HTMLSelectElement;
+  const sectorSel = document.getElementById('sector') as HTMLSelectElement;
+  const domainSel = document.getElementById('domain') as HTMLSelectElement;
+  const rows = Array.from(document.querySelectorAll<HTMLElement>('.role'));
+  const pins = Array.from(document.querySelectorAll<HTMLButtonElement>('.pin'));
+  const topPorts = Array.from(document.querySelectorAll<HTMLButtonElement>('.top-port'));
+  const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-contract]'));
+  const moreBtn = document.getElementById('more') as HTMLButtonElement;
+  const empty = document.getElementById('empty') as HTMLElement;
+  const clearPortBtn = document.querySelector('.clear-port') as HTMLButtonElement;
 
-    for (const card of cards) {
-      const haystack = card.dataset.search ?? '';
-      const matchesSearch = !q || haystack.includes(q);
-      const matchesCountry = !fc || card.dataset.country === fc;
-      const matchesDomain = !fd || card.dataset.domain === fd;
-      const matchesType = !ft || card.dataset.type === ft;
-      const visibleNow =
-        matchesSearch && matchesCountry && matchesDomain && matchesType;
-      card.hidden = !visibleNow;
-      if (visibleNow) visible++;
-    }
+  const state = { contract: '', limit: PAGE };
 
-    counter.textContent = String(visible);
-    empty.hidden = visible !== 0;
-    grid.hidden = visible === 0;
+  const setText = (sel: string, text: string) =>
+    document.querySelectorAll(sel).forEach((el) => (el.textContent = text));
+
+  function matches(row: HTMLElement, opts: { port?: boolean; contract?: boolean }) {
+    const d = row.dataset;
+    const term = q.value.trim().toLowerCase();
+    if (term && !(d.search ?? '').includes(term)) return false;
+    if (sectorSel.value && d.sector !== sectorSel.value) return false;
+    if (domainSel.value && d.domain !== domainSel.value) return false;
+    if (opts.contract !== false && state.contract && d.type !== state.contract) return false;
+    if (opts.port !== false && portSel.value && d.port !== portSel.value) return false;
+    return true;
   }
 
-  function clearAll() {
-    search.value = '';
-    country.value = '';
-    domain.value = '';
-    type.value = '';
-    apply();
+  function render() {
+    const port = portSel.value;
+
+    // List
+    const hits = rows.filter((r) => matches(r, {}));
+    rows.forEach((r) => (r.hidden = true));
+    hits.forEach((r, i) => {
+      r.hidden = i >= state.limit;
+      const no = r.querySelector('.role-no');
+      if (no) no.textContent = 'No.' + String(i + 1).padStart(3, '0');
+    });
+    const total = hits.length;
+    setText('[data-total]', String(total));
+    setText('[data-total-word]', total === 1 ? 'role' : 'roles');
+    setText('[data-scope]', port || 'All ports');
+    clearPortBtn.hidden = !port;
+    empty.hidden = total !== 0;
+    const left = total - state.limit;
+    moreBtn.hidden = left <= 0;
+    setText('[data-more-count]', String(Math.min(PAGE, Math.max(left, 0))));
+    setText('[data-left]', String(Math.max(left, 0)));
+
+    // Map pins and top ports: counts ignore the port filter itself
+    const perPort = new Map<string, number>();
+    rows.filter((r) => matches(r, { port: false })).forEach((r) => {
+      const p = r.dataset.port ?? '';
+      perPort.set(p, (perPort.get(p) ?? 0) + 1);
+    });
+    pins.forEach((pin) => {
+      const p = pin.dataset.port ?? '';
+      const n = perPort.get(p) ?? 0;
+      pin.classList.toggle('is-dim', n === 0);
+      pin.setAttribute('aria-pressed', String(p === port));
+      pin.setAttribute('aria-label', `${p}, ${n} matching ${n === 1 ? 'role' : 'roles'}`);
+      const c = pin.querySelector('[data-pin-count]');
+      if (c) c.textContent = String(n);
+    });
+    topPorts.forEach((btn) => {
+      const p = btn.dataset.port ?? '';
+      btn.setAttribute('aria-pressed', String(p === port));
+      setText(`[data-top-count="${CSS.escape(p)}"]`, String(perPort.get(p) ?? 0));
+    });
+
+    // Contract chips: counts ignore the contract filter itself
+    const pool = rows.filter((r) => matches(r, { contract: false }));
+    chips.forEach((chip) => {
+      const v = chip.dataset.contract ?? '';
+      chip.setAttribute('aria-pressed', String(v === state.contract));
+      const n = pool.filter((r) => !v || r.dataset.type === v).length;
+      const c = chip.querySelector('[data-contract-count]');
+      if (c) c.textContent = String(n);
+    });
+
+    // Summary
+    const active = [q.value.trim(), port, sectorSel.value, domainSel.value, state.contract].filter(Boolean).length;
+    setText(
+      '[data-summary]',
+      active === 0
+        ? `No filters · all ${TOTAL_ALL} roles`
+        : `${active} ${active === 1 ? 'filter' : 'filters'} · ${total} of ${TOTAL_ALL}`
+    );
   }
 
-  [search, country, domain, type].forEach((el) =>
-    el.addEventListener('input', apply)
+  function refilter() {
+    state.limit = PAGE;
+    render();
+  }
+
+  function selectPort(port: string) {
+    portSel.value = portSel.value === port ? '' : port;
+    refilter();
+  }
+
+  function resetAll() {
+    form.reset();
+    state.contract = '';
+    refilter();
+  }
+
+  q.addEventListener('input', refilter);
+  [portSel, sectorSel, domainSel].forEach((el) => el.addEventListener('change', refilter));
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('roles')?.scrollIntoView();
+  });
+  form.addEventListener('reset', () => {
+    state.contract = '';
+    // form.reset() clears fields after this event fires
+    setTimeout(refilter, 0);
+  });
+  chips.forEach((chip) =>
+    chip.addEventListener('click', () => {
+      state.contract = chip.dataset.contract ?? '';
+      refilter();
+    })
   );
-  reset.addEventListener('click', clearAll);
-  resetLink?.addEventListener('click', clearAll);
+  pins.forEach((pin) => pin.addEventListener('click', () => selectPort(pin.dataset.port ?? '')));
+  topPorts.forEach((btn) => btn.addEventListener('click', () => selectPort(btn.dataset.port ?? '')));
+  clearPortBtn.addEventListener('click', () => {
+    portSel.value = '';
+    refilter();
+  });
+  document.querySelector('[data-reset]')?.addEventListener('click', resetAll);
+  moreBtn.addEventListener('click', () => {
+    state.limit += PAGE;
+    render();
+  });
+
+  render();
 </script>

@@ -1,13 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import {
-  companies,
-  countryFlag,
-  countryLabel,
-  typeLabel,
-  jobsByType,
-} from '../../lib/jobs';
-import type { Job } from '../../lib/jobs';
+import { companies, countryLabel, typeLabel, jobsByType, source } from '../../lib/jobs';
+import type { Company, Job, JobType } from '../../lib/jobs';
 import { url } from '../../lib/url';
 
 export function getStaticPaths() {
@@ -17,279 +11,374 @@ export function getStaticPaths() {
   }));
 }
 
-const { company } = Astro.props;
+const { company } = Astro.props as { company: Company };
 const groups = jobsByType(company);
 
-const sections: { key: 'job' | 'internship' | 'research'; label: string; items: Job[] }[] = [
-  { key: 'job', label: 'Permanent positions', items: groups.jobs },
-  { key: 'internship', label: 'Internships / Alternance', items: groups.internships },
-  { key: 'research', label: 'Research', items: groups.research },
+const sections: { key: JobType; label: string; items: Job[] }[] = [
+  { key: 'job' as const, label: 'Full-time', items: groups.jobs },
+  { key: 'internship' as const, label: 'Internships & work-study', items: groups.internships },
+  { key: 'research' as const, label: 'Research', items: groups.research },
 ].filter((s) => s.items.length > 0);
+
+const stats = [
+  { label: 'Openings', value: company.jobs.length + (company.moreOpenings ?? 0) },
+  // A per-type breakdown only adds information when there is more than one type.
+  ...(sections.length > 1 ? sections.map((s) => ({ label: s.label.split(' ')[0], value: s.items.length })) : []),
+].slice(0, 3);
+
+const peers = companies
+  .filter((c) => c.category === company.category && c.slug !== company.slug)
+  .sort((a, b) => b.jobs.length - a.jobs.length)
+  .slice(0, 5);
+
+const isExternal = (href: string) => /^https?:/.test(href);
 ---
 
-<Layout title={`${company.name} — Maritime Jobs`} description={company.description}>
+<Layout title={`${company.name} — Jobs Velic`} description={company.description}>
   <section class="company-hero">
     <div class="container">
-      <a href={url('/')} class="back-link">← Back to listings</a>
+      <a href={url('/#roles')} class="back">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+        All roles
+      </a>
 
-      <div class="company-header">
-        <div>
-          <p class="company-eyebrow">
-            <span>{countryFlag(company.country)} {countryLabel(company.country)} — {company.city}</span>
-            <span class="dot">·</span>
-            <span>{company.category}</span>
-          </p>
-          <h1>{company.name}</h1>
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow on-dark">{company.category} · {company.city}, {countryLabel(company.country)}</p>
+          <h1 class="display company-name">{company.name}</h1>
           <p class="company-desc">{company.description}</p>
+          <div class="hero-actions">
+            <a class="pill pill-accent" href={company.applyUrl} target={isExternal(company.applyUrl) ? '_blank' : undefined} rel="noopener">
+              Apply on the careers page
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
+            </a>
+            {
+              company.website !== company.applyUrl && (
+                <a class="pill pill-ghost" href={company.website} target="_blank" rel="noopener">Company site</a>
+              )
+            }
+          </div>
         </div>
-
-        <div class="hero-actions">
-          <a class="external-link primary" href={company.applyUrl} target="_blank" rel="noopener">
-            View openings ↗
-          </a>
-          <a class="external-link secondary" href={company.website} target="_blank" rel="noopener">
-            Company site
-          </a>
-        </div>
+        <dl class="stats" style={`--cols: ${stats.length}`}>
+          {
+            stats.map((s) => (
+              <div>
+                <dt>{s.label}</dt>
+                <dd>{s.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
       </div>
     </div>
   </section>
 
-  <section class="container company-section">
-    {
-      sections.map((section) => (
-        <div class="role-section">
-          <h2>
-            {section.label}{' '}
-            <span class="count">({section.items.length})</span>
-          </h2>
-
-          <ul class="role-list">
-            {section.items.map((job) => {
-              const country = job.country ?? company.country;
-              const city = job.city ?? company.city;
-              const applyUrl = job.applyUrl ?? company.applyUrl;
-              const showLocation =
-                country !== company.country || city !== company.city;
-              return (
-                <li class="role-row">
-                  <div class="role-main">
-                    <span class={`badge badge-${section.key}`}>
-                      {typeLabel(section.key)}
-                    </span>
-                    <span class="role-title">{job.title}</span>
-                    {showLocation && (
-                      <span class="role-loc">
-                        {countryFlag(country)} {city}
-                      </span>
-                    )}
-                  </div>
-                  <div class="role-side">
-                    <span class="role-domain">{job.domain}</span>
-                    <a
-                      class="apply-link"
-                      href={applyUrl}
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      Apply ↗
+  <div class="container company-body">
+    <div class="sections">
+      {
+        sections.map((section) => (
+          <section>
+            <div class="section-head">
+              <h2>{section.label}</h2>
+              <span>{section.items.length} {section.items.length === 1 ? 'role' : 'roles'}</span>
+            </div>
+            <ul class="role-list">
+              {section.items.map((job, i) => {
+                const city = job.city ?? company.city;
+                const country = job.country ?? company.country;
+                const where = city !== company.city || country !== company.country ? `${city}, ${country}` : null;
+                const meta = [where, job.note].filter(Boolean).join(' · ');
+                const href = job.applyUrl ?? company.applyUrl;
+                return (
+                  <li class="role-row">
+                    <span class="role-no">{String(i + 1).padStart(2, '0')}</span>
+                    <div class="role-main">
+                      <span class="role-title">{job.title}</span>
+                      {meta && <span class="role-meta">{meta}</span>}
+                    </div>
+                    <span class="tag tag-line">{job.domain}</span>
+                    <span class={`tag tag-${section.key}`}>{typeLabel(section.key)}</span>
+                    <a class="apply" href={href} target={isExternal(href) ? '_blank' : undefined} rel="noopener" aria-label={`Apply: ${job.title}`}>
+                      Apply
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
                     </a>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ))
-    }
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))
+      }
+      {
+        company.moreOpenings && (
+          <p class="more-note">
+            + {company.moreOpenings} more {company.moreOpenings === 1 ? 'opening' : 'openings'} listed on the
+            careers page without a title in the review.
+          </p>
+        )
+      }
+    </div>
 
-    <p class="muted footnote">
-      Listings sourced from the May 2026 review by Velic Consulting. For
-      official applications, please verify the role on the company's careers page.
-    </p>
-  </section>
+    <aside class="aside">
+      {
+        peers.length > 0 && (
+          <div class="card">
+            <p class="card-label">Also in {company.category.toLowerCase()}</p>
+            <ul class="peers">
+              {peers.map((p) => (
+                <li>
+                  <a href={url(`/company/${p.slug}/`)}>
+                    <span>
+                      <span class="peer-name">{p.name}</span>
+                      <span class="peer-city">{p.city}, {p.country}</span>
+                    </span>
+                    <span class="peer-n">{p.jobs.length + (p.moreOpenings ?? 0)}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+      <p class="footnote">
+        Listing from the {source.publisher} review, {source.edition}. Confirm each role on the company's official site.
+      </p>
+    </aside>
+  </div>
 </Layout>
 
 <style>
   .company-hero {
-    background: linear-gradient(
-      135deg,
-      var(--ocean-900) 0%,
-      var(--ocean-700) 100%
-    );
-    color: white;
-    padding: 40px 0 56px;
+    background: var(--navy);
+    color: #fff;
+    padding: 8px 0 80px;
   }
-
-  .back-link {
-    color: #cfdbe8;
-    font-size: 0.9rem;
-    display: inline-block;
-    margin-bottom: 20px;
-  }
-  .back-link:hover {
-    color: white;
-  }
-
-  .company-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
-  .company-eyebrow {
-    color: var(--turquoise);
-    font-size: 0.92rem;
-    margin: 0 0 10px;
-    font-weight: 500;
+  .back {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    min-height: 44px;
+    color: var(--mist);
+    text-decoration: none;
+  }
+  .back:hover {
+    color: #fff;
+  }
+  .hero-grid {
+    margin-top: 32px;
+    display: flex;
     flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
   }
-  .dot {
-    opacity: 0.6;
+  .hero-text {
+    flex: 999 1 560px;
+    min-width: 0;
   }
-
-  .company-hero h1 {
-    color: white;
-    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-    margin: 0 0 12px;
+  .eyebrow.on-dark {
+    color: var(--sky);
+    margin-bottom: 20px;
+  }
+  .company-name {
+    font-size: clamp(44px, 5.6vw, 84px);
+    overflow-wrap: anywhere;
   }
   .company-desc {
-    color: #cfdbe8;
-    max-width: 640px;
+    margin: 28px 0 0;
+    max-width: 620px;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--mist);
+  }
+  .hero-actions {
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .pill-ghost {
+    border-color: #4d6a80;
+    color: #fff;
+  }
+  .pill-ghost:hover {
+    border-color: #fff;
+    color: #fff;
+  }
+  .stats {
+    flex: 0 1 calc(var(--cols) * 130px + 56px);
     margin: 0;
-    font-size: 1.02rem;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: 24px;
+    padding: 28px;
+    border: 1px solid var(--line-dark);
+    border-radius: 20px;
+    background: var(--navy-2);
+  }
+  .stats dt {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sky);
+  }
+  .stats dd {
+    margin: 8px 0 0;
+    font-size: 44px;
+    font-weight: 850;
+    font-stretch: 112%;
+    line-height: 1;
   }
 
-  .hero-actions {
+  .company-body {
+    padding-top: 80px;
+    padding-bottom: 112px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+  }
+  .sections {
+    flex: 999 1 640px;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 72px;
   }
-  .external-link {
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-weight: 600;
-    white-space: nowrap;
-    text-align: center;
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
   }
-  .external-link.primary {
-    background: var(--turquoise);
-    color: var(--ocean-900);
+  .section-head h2 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 850;
+    font-stretch: 112%;
   }
-  .external-link.primary:hover {
-    background: white;
-    text-decoration: none;
-  }
-  .external-link.secondary {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #cfdbe8;
-  }
-  .external-link.secondary:hover {
-    background: rgba(255, 255, 255, 0.08);
-    text-decoration: none;
-    color: white;
-  }
-
-  .company-section {
-    padding-top: 32px;
-  }
-
-  .role-section + .role-section {
-    margin-top: 32px;
-  }
-
-  h2 .count {
+  .section-head span {
+    font-family: var(--mono);
+    font-size: 14px;
     color: var(--muted);
-    font-weight: 500;
-    font-size: 0.85em;
   }
-
   .role-list {
     list-style: none;
+    margin: 0;
     padding: 0;
-    margin: 16px 0 0;
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
+  }
+  .role-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .role-no {
+    width: 40px;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .role-main {
+    flex: 999 1 280px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .role-title {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .role-meta {
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .apply {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .apply:hover {
+    background: var(--ink);
+    color: #fff;
+  }
+  .more-note {
+    margin: -40px 0 0;
+    font-size: 16px;
+    color: var(--muted);
   }
 
-  .role-row {
+  .aside {
+    flex: 1 1 320px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line-2);
+    border-radius: 20px;
+    padding: 28px 32px;
+  }
+  .card-label {
+    margin: 0 0 8px;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .peers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .peers li + li {
+    border-top: 1px solid var(--line-2);
+  }
+  .peers a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--border);
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .role-row:last-child {
-    border-bottom: 0;
-  }
-
-  .role-main {
-    display: flex;
-    align-items: center;
     gap: 12px;
-    flex-wrap: wrap;
+    min-height: 64px;
+    padding: 10px 0;
+    text-decoration: none;
   }
-  .role-title {
-    font-weight: 600;
-    color: var(--ocean-900);
+  .peer-name {
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
   }
-  .role-loc {
+  .peer-city {
+    display: block;
+    margin-top: 2px;
+    font-size: 15px;
+    color: var(--ink-3);
+  }
+  .peer-n {
+    font-family: var(--mono);
+    font-size: 14px;
     color: var(--muted);
-    font-size: 0.85rem;
-    background: var(--paper-2);
-    padding: 2px 8px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
   }
-  .role-side {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .role-domain {
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-  .apply-link {
-    color: var(--ocean-500);
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  .badge {
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 3px 8px;
-    border-radius: 999px;
-  }
-  .badge-job {
-    background: rgba(45, 212, 191, 0.15);
-    color: #0d7869;
-  }
-  .badge-internship {
-    background: rgba(31, 111, 178, 0.12);
-    color: var(--ocean-700);
-  }
-  .badge-research {
-    background: rgba(168, 85, 247, 0.12);
-    color: #6d28d9;
-  }
-
   .footnote {
-    font-size: 0.85rem;
-    margin-top: 24px;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--muted);
   }
 </style>
