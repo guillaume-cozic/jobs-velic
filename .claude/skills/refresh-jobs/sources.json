@@ -1,0 +1,84 @@
+{
+  "_doc": "Where to read each company's current openings. kind: html = list in the server HTML (curl/WebFetch is enough); js = list rendered by JavaScript (needs a headless browser); api = JSON or XML endpoint; rss = RSS search feed; postings = no usable list, check each posting URL from jobs.json; none = no public source found (LinkedIn post, mailto). closedText = wording shown when a posting is closed. keywords = search terms for large groups. Update listUrl/kind/notes after each crawl when a better source is found.",
+  "lastUpdated": "2026-10-29",
+  "companies": {
+    "maersk": {
+      "kind": "api",
+      "listUrl": "https://maersk.wd3.myworkdayjobs.com/wday/cxs/maersk/Maersk_Careers/jobs",
+      "notes": "Workday search API: POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"<keyword>\"}. Posting detail: GET the same base + externalPath. The review linked R197299 (Freight Forwarding) by mistake; the wind role is R197106.",
+      "keywords": ["wind", "vessel performance", "marine fuels", "decarbonisation", "LNG", "methanol", "energy efficiency"]
+    },
+    "airseas": { "kind": "html", "listUrl": "https://careers.werecruit.io/fr/airseas", "notes": "WeRecruit; shows 'N offres trouvées'." },
+    "anemoi": { "kind": "api", "listUrl": "https://anemoi.bamboohr.com/careers/list", "notes": "BambooHR JSON; posting page = /careers/<id>." },
+    "beyond-the-sea": { "kind": "js", "listUrl": "https://beyond-the-sea.zohorecruit.eu/jobs/Careers", "notes": "Zoho Recruit; 'STA -' = stage, 'ALT -' = alternance. Ignore 'Candidature spontanée'." },
+    "birmingham-city-university": {
+      "kind": "postings",
+      "listUrl": "https://www.jobs.ac.uk/job/DTG089",
+      "notes": "Post-doc on jobs.ac.uk (closes 2026-11-02); PhD on bcu.ac.uk/research/our-phds (closes 2026-11-25). Search jobs.ac.uk for 'wind assisted' for new ones."
+    },
+    "bluefins": { "kind": "none", "notes": "Only a LinkedIn post; no website or job board found." },
+    "boaton": { "kind": "html", "listUrl": "https://www.info.boaton.fr/jobs" },
+    "bound4blue": { "kind": "html", "listUrl": "https://careers.bound4blue.com/jobs", "notes": "Teamtailor. The review links LinkedIn, which needs a login." },
+    "bpifrance": { "kind": "postings", "listUrl": "https://bpi.tzportal.io/fr/jobs/6186-57", "notes": "Single posting; still open if the apply button is shown." },
+    "bureau-veritas": {
+      "kind": "postings",
+      "closedText": "Désolé, ce poste est déjà pourvu",
+      "notes": "Search careers.bureauveritas.com/search/?q=<keyword> for new in-scope roles.",
+      "keywords": ["maritime", "efficacité énergétique", "transition énergétique", "decarbonisation"]
+    },
+    "bureau-veritas-marine-offshore": {
+      "kind": "postings",
+      "closedText": "Désolé, ce poste est déjà pourvu",
+      "notes": "Same careers site as Bureau Veritas.",
+      "keywords": ["maritime", "marine", "transition énergétique"]
+    },
+    "candela": { "kind": "html", "listUrl": "https://careers.candela.com/jobs", "notes": "Teamtailor." },
+    "centrale-nantes": { "kind": "html", "listUrl": "https://jobs.ec-nantes.fr/offres-demploi", "notes": "Keep only LHEEA / ocean / naval roles." },
+    "chantiers-de-l-atlantique": {
+      "kind": "html",
+      "listUrl": "https://carrieres-offresemploi.chantiers-atlantique.com/offre-de-emploi/liste-toutes-offres.aspx",
+      "closedText": "L'offre que vous essayez d'afficher n'existe pas ou plus sur ce site",
+      "notes": "19 pages (~180 offers); keep Propulsion Vélique / SolidSail and decarbonisation roles. Closed postings redirect to accueil.aspx."
+    },
+    "circeo": { "kind": "html", "listUrl": "https://www.circeo.earth/careers" },
+    "cma-cgm": {
+      "kind": "rss",
+      "listUrl": "https://jobs.cmacgm-group.com/services/rss/job/?locale=fr_FR&keywords=(decarbonization)",
+      "closedText": "not available at this time",
+      "notes": "Replace the keywords in the URL. The search is fuzzy: check each result title. FR and EN versions of the same posting: keep the FR one.",
+      "keywords": ["decarbonization", "décarbonation", "LNG", "alternative fuels", "energy efficiency", "performance maritime"]
+    },
+    "crain": { "kind": "html", "listUrl": "https://www.craintechnologies.com/index.php/fr/", "notes": "No careers page; openings are posted as homepage news items." },
+    "dealfeng": { "kind": "none", "notes": "Only a LinkedIn post; company based in Tianjin, China." },
+    "d-ice-engineering": { "kind": "html", "listUrl": "https://www.dice-engineering.com/carriere" },
+    "dgampa": { "kind": "postings", "notes": "recrutement.ecologie.gouv.fr postings 2026-2244509 and 2026-2430962, deadline 2026-11-05." },
+    "econowind": { "kind": "html", "listUrl": "https://econowind.nl/careers/" },
+    "genevos": {
+      "kind": "html",
+      "listUrl": "https://www.genevos.com/careers",
+      "notes": "Each role has a status label before its title: 'job opening' = open, 'coming soon' = announced, not open yet. Job descriptions are PDFs; apply via careers@genevos.com."
+    },
+    "iscc": { "kind": "api", "listUrl": "https://iscc-system-gmbh.jobs.personio.de/xml", "notes": "Personio XML feed; HTML board at https://iscc-system-gmbh.jobs.personio.de/. Keep marine-fuel roles." },
+    "james-fisher": { "kind": "html", "listUrl": "https://vacancies.james-fisher.com/", "notes": "Paginated (5 pages, ~50 vacancies); read every page. Closed vacancies return HTTP 410." },
+    "mwi": { "kind": "html", "listUrl": "https://careers.marine-weather.com/jobs", "notes": "Teamtailor. The review links LinkedIn." },
+    "oceanbird": { "kind": "html", "listUrl": "https://www.theoceanbird.com/about-us/careers" },
+    "orient-express": { "kind": "none", "notes": "Apply by e-mail only (mailto); no public posting found." },
+    "royal-caribbean-group": {
+      "kind": "html",
+      "listUrl": "https://jobs.royalcaribbeangroup.com/search/?q=decarbonization",
+      "keywords": ["decarbonization", "maritime technical", "energy efficiency", "deployment planning"]
+    },
+    "sinay": { "kind": "js", "listUrl": "https://www.welcometothejungle.com/fr/companies/sinay/jobs", "notes": "Welcome to the Jungle, rendered by JavaScript: use a headless browser. sinay.ai/en/about-us/jobs/ lists nothing." },
+    "spinergie": { "kind": "none", "listUrl": "https://www.spinergie.com/careers", "notes": "Careers page lists no roles; postings are LinkedIn-only." },
+    "stormgeo": {
+      "kind": "html",
+      "listUrl": "https://www.stormgeo.com/careers",
+      "notes": "Returns 403 to bots; the same list is readable at https://stormgeo-web-next.vercel.app/careers. Keep maritime roles only (fleet / vessel performance, routing)."
+    },
+    "syroco": { "kind": "html", "listUrl": "https://syroco.jobs.personio.com/?language=en", "notes": "Personio board (the /xml feed returns 404). It lists more roles than syro.co. Skip 'Unsolicited Application', 'Recueil' and untitled freelancer entries." },
+    "toqua": { "kind": "html", "listUrl": "https://toqua.ai/careers", "notes": "Skip 'Spontaneous Application' and the generic 'Internship' page." },
+    "towt": { "kind": "none", "notes": "LinkedIn post only; towt.eu has no careers page. Applications: recrutement@newtowt.eu." },
+    "wisamo": { "kind": "none", "notes": "LinkedIn post only; wisamo.michelin.com has no careers section. Try recrutement.michelin.fr with 'WISAMO'." },
+    "zeronorth": { "kind": "html", "listUrl": "https://careers.zeronorth.com/jobs", "notes": "Teamtailor." }
+  }
+}

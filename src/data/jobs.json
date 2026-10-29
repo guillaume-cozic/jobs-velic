@@ -4,7 +4,8 @@
     "edition": "October 2026",
     "author": "Christophe Brière de La Hosseraye",
     "publisher": "Velic Consulting",
-    "totalAdvertised": 115
+    "totalAdvertised": 123,
+    "lastChecked": "2026-10-29"
   },
   "companies": [
     {
@@ -17,8 +18,9 @@
       "website": "https://www.maersk.com",
       "applyUrl": "https://maersk.wd3.myworkdayjobs.com/Maersk_Careers/job/Denmark-Aarhus-8210/Project-Manager_R197299-1",
       "jobs": [
-        { "title": "Project Manager, Wind Operations Team", "domain": "Business", "type": "job" },
-        { "title": "Vessel Performance Manager", "domain": "Data & AI", "type": "job", "city": "Mumbai", "country": "IN" }
+        { "title": "Project Manager, Wind Operations Team", "domain": "Business", "type": "job", "applyUrl": "https://maersk.wd3.myworkdayjobs.com/Maersk_Careers/job/DK---Aarhus/Project-Manager--Logistics-Operation--Renewables-_R197106-1" },
+        { "title": "Senior Marine Fuels Specialist", "domain": "Engineering", "type": "job", "city": "Copenhagen", "note": "Ref. R196069", "applyUrl": "https://maersk.wd3.myworkdayjobs.com/Maersk_Careers/job/Denmark-Copenhagen-2100/Senior-Marine-Fuels-Specialist_R196069-1" },
+        { "title": "Senior Technology Lead LNG", "domain": "Engineering", "type": "job", "city": "Copenhagen", "note": "Ref. R195277", "applyUrl": "https://maersk.wd3.myworkdayjobs.com/Maersk_Careers/job/DKCPH80---Copenhagen---Maersk-AS--Hub5--Sundkrogsgade-7-/Senior-Technology-Lead-LNG_R195277-1" }
       ]
     },
     {
@@ -30,14 +32,16 @@
       "description": "Kite propulsion systems for cargo ships (Seawing).",
       "website": "https://www.airseas.com",
       "applyUrl": "https://careers.werecruit.io/fr/airseas",
-      "moreOpenings": 1,
       "jobs": [
-        { "title": "Gestionnaire RH et office management", "domain": "Business", "type": "job", "note": "CDD" },
-        { "title": "Ingénieur conception système automatisé", "domain": "Engineering", "type": "job", "note": "CDD" },
-        { "title": "Projeteur électrique", "domain": "Engineering", "type": "job", "note": "CDI" },
-        { "title": "Technicien embarqué – Systèmes automatisés", "domain": "Engineering", "type": "job", "note": "CDI" },
-        { "title": "Coordinateur qualité", "domain": "Business", "type": "job", "note": "CDI" },
-        { "title": "Agent logistique", "domain": "Operations", "type": "job", "note": "CDI" }
+        { "title": "Projeteur électrique", "domain": "Engineering", "type": "job", "note": "CDI", "applyUrl": "https://careers.werecruit.io/fr/airseas/offres/projeteur-electrique-f3cfe5" },
+        { "title": "Technicien embarqué – Systèmes automatisés", "domain": "Engineering", "type": "job", "note": "CDI", "applyUrl": "https://careers.werecruit.io/fr/airseas/offres/technicien-embarque--systemes-automatises-1c2848" },
+        { "title": "Coordinateur qualité", "domain": "Business", "type": "job", "note": "CDI", "applyUrl": "https://careers.werecruit.io/fr/airseas/offres/coordinateur-qualite-dbb115" },
+        { "title": "Comptable / Accountant", "domain": "Business", "type": "job", "note": "CDI", "applyUrl": "https://careers.werecruit.io/fr/airseas/offres/comptable--accountant-c2caa7" },
+        { "title": "Stage - Projeteur électrique", "domain": "Engineering", "type": "internship", "note": "6 months", "applyUrl": "https://careers.werecruit.io/fr/airseas/offres/stage---projeteur-electrique-70f156" },
+        { "title": "Stage - Conception Mécanique", "domain": "Engineering", "type": "internship", "note": "6 months", "applyUrl": "https://careers.werecruit.io/fr/airseas/offres/stage---conception-mecanique-6e6b44" },
+        { "title": "Technicien d'Atelier Polyvalent", "domain": "Operations", "type": "job", "note": "CDD, 12 months", "applyUrl": "https://careers.werecruit.io/fr/airseas/offres/technicien-datelier-polyvalent-6e3685" },
+        { "title": "Technicien Couture", "domain": "Operations", "type": "job", "note": "CDD, 12 months", "applyUrl": "https://careers.werecruit.io/fr/airseas/offres/technicien-couture-5a20d2" },
+        { "title": "Ingénieur Lois de Pilotage", "domain": "Engineering", "type": "job", "note": "CDI", "applyUrl": "https://careers.werecruit.io/fr/airseas/offres/ingenieur-lois-de-pilotage-d26e12" }
       ]
     },
     {
@@ -50,8 +54,12 @@
       "website": "https://anemoimarine.com",
       "applyUrl": "https://anemoi.bamboohr.com/careers",
       "jobs": [
-        { "title": "Vessel Performance Engineer", "domain": "Engineering", "type": "job", "note": "Hybrid" },
-        { "title": "Field Service Engineer, China", "domain": "Engineering", "type": "job", "city": "Jingjiang", "country": "CN", "note": "On site" }
+        { "title": "Vessel Performance Engineer", "domain": "Engineering", "type": "job", "note": "Hybrid", "applyUrl": "https://anemoi.bamboohr.com/careers/178" },
+        { "title": "Field Service Engineer, China", "domain": "Engineering", "type": "job", "city": "Jingjiang", "country": "CN", "note": "On site", "applyUrl": "https://anemoi.bamboohr.com/careers/175" },
+        { "title": "Senior Design Electrical Engineer", "domain": "Engineering", "type": "job", "city": "Jingjiang", "country": "CN", "applyUrl": "https://anemoi.bamboohr.com/careers/177" },
+        { "title": "Senior Software Engineer (Python)", "domain": "Software", "type": "job", "note": "Contractor", "applyUrl": "https://anemoi.bamboohr.com/careers/179" },
+        { "title": "Performance Engineer", "domain": "Engineering", "type": "job", "applyUrl": "https://anemoi.bamboohr.com/careers/180" },
+        { "title": "Marine Electrical Engineer", "domain": "Engineering", "type": "job", "applyUrl": "https://anemoi.bamboohr.com/careers/181" }
       ]
     },
     {
@@ -64,13 +72,11 @@
       "website": "https://www.beyond-the-sea.com",
       "applyUrl": "https://beyond-the-sea.zohorecruit.eu/jobs/Careers",
       "jobs": [
-        { "title": "Ingénieur en contrôle de systèmes / automatique", "domain": "Engineering", "type": "job", "note": "CDI" },
-        { "title": "Chef de projet", "domain": "Business", "type": "job", "note": "CDI" },
-        { "title": "Ingénieur ACV", "domain": "Consulting", "type": "internship" },
-        { "title": "Ingénieur QSSE", "domain": "Engineering", "type": "internship" },
-        { "title": "Assistant comptable", "domain": "Business", "type": "internship" },
-        { "title": "Coordinateur de projets", "domain": "Business", "type": "internship", "note": "Alternance" },
-        { "title": "Ingénieur d'essais", "domain": "Engineering", "type": "internship" }
+        { "title": "Ingénieur ACV", "domain": "Consulting", "type": "internship", "applyUrl": "https://beyond-the-sea.zohorecruit.eu/jobs/Careers/86287000000632025" },
+        { "title": "Ingénieur QSSE", "domain": "Engineering", "type": "internship", "applyUrl": "https://beyond-the-sea.zohorecruit.eu/jobs/Careers/86287000000762088" },
+        { "title": "Assistant comptable", "domain": "Business", "type": "internship", "applyUrl": "https://beyond-the-sea.zohorecruit.eu/jobs/Careers/86287000001097003" },
+        { "title": "Coordinateur de projets", "domain": "Business", "type": "internship", "note": "Alternance", "applyUrl": "https://beyond-the-sea.zohorecruit.eu/jobs/Careers/86287000000657087" },
+        { "title": "Ingénieur d'essais", "domain": "Engineering", "type": "internship", "applyUrl": "https://beyond-the-sea.zohorecruit.eu/jobs/Careers/86287000001594001" }
       ]
     },
     {
@@ -83,8 +89,8 @@
       "website": "https://www.bcu.ac.uk",
       "applyUrl": "https://www.linkedin.com/posts/post-doctroral-researcher-and-phd-studentship-share-7514707867099299840--Yr0/",
       "jobs": [
-        { "title": "Post-Doctoral Researcher in Wind Assisted Ship Propulsion", "domain": "Research", "type": "research" },
-        { "title": "PhD in Wind-Assisted Ship Performance Prediction for Regulatory GHG Reduction Assessment", "domain": "Research", "type": "research" }
+        { "title": "Post-Doctoral Researcher in Wind Assisted Ship Propulsion", "domain": "Research", "type": "research", "applyUrl": "https://www.jobs.ac.uk/job/DTG089" },
+        { "title": "PhD in Wind-Assisted Ship Performance Prediction for Regulatory GHG Reduction Assessment", "domain": "Research", "type": "research", "applyUrl": "https://www.bcu.ac.uk/research/our-phds/phd-opportunities/wind-assisted-ship-performance-prediction-for-regulatory-greenhouse-gas-reduction-assessment" }
       ]
     },
     {
@@ -125,8 +131,7 @@
       "website": "https://bound4blue.com",
       "applyUrl": "https://www.linkedin.com/company/bound4blue/jobs/",
       "jobs": [
-        { "title": "Performance Solutions Engineer", "domain": "Engineering", "type": "job", "city": "Sant Cugat del Vallès", "note": "Hybrid" },
-        { "title": "Field Service Specialist – China", "domain": "Engineering", "type": "job", "city": "Changzhou–Wuxi–Suzhou", "country": "CN" }
+        { "title": "Performance Solutions Engineer", "domain": "Engineering", "type": "job", "city": "Sant Cugat del Vallès", "note": "Hybrid", "applyUrl": "https://careers.bound4blue.com/jobs/8519482-performance-solutions-engineer" }
       ]
     },
     {
@@ -151,9 +156,7 @@
       "description": "Testing, inspection and certification group.",
       "website": "https://group.bureauveritas.com",
       "applyUrl": "https://careers.bureauveritas.com/job/COURBEVOIE-Ing%C3%A9nieur-Efficacit%C3%A9-Energ%C3%A9tique-CEE-%28F-H-X%29-Ile/1381623733/",
-      "jobs": [
-        { "title": "Ingénieur Efficacité Énergétique CEE", "domain": "Consulting", "type": "job", "note": "CDI" }
-      ]
+      "jobs": []
     },
     {
       "slug": "bureau-veritas-marine-offshore",
@@ -178,11 +181,10 @@
       "website": "https://candela.com",
       "applyUrl": "https://careers.candela.com/",
       "jobs": [
-        { "title": "Warehouse & Logistic Operator", "domain": "Operations", "type": "job" },
-        { "title": "Paint Prep", "domain": "Operations", "type": "job" },
-        { "title": "Boat Builder", "domain": "Operations", "type": "job" },
-        { "title": "Carpenter / Finsnickare", "domain": "Operations", "type": "job" },
-        { "title": "Open application – Internships & Thesis work", "domain": "Engineering", "type": "internship" }
+        { "title": "Warehouse & Logistic Operator", "domain": "Operations", "type": "job", "applyUrl": "https://careers.candela.com/jobs/8453962-warehouse-logistic-operator" },
+        { "title": "Boat Builder", "domain": "Operations", "type": "job", "applyUrl": "https://careers.candela.com/jobs/8050243-boat-builder" },
+        { "title": "Carpenter / Finsnickare", "domain": "Operations", "type": "job", "applyUrl": "https://careers.candela.com/jobs/7254818-carpenter-finsnickare" },
+        { "title": "Open application – Internships & Thesis work", "domain": "Engineering", "type": "internship", "applyUrl": "https://careers.candela.com/jobs/7178424-open-application-internships-thesis-work-at-candela" }
       ]
     },
     {
@@ -208,9 +210,8 @@
       "website": "https://chantiers-atlantique.com",
       "applyUrl": "https://carrieres-offresemploi.chantiers-atlantique.com/",
       "jobs": [
-        { "title": "Ingénieur conception accastillage – Propulsion vélique", "domain": "Engineering", "type": "job", "note": "Ref. 2026-2235" },
-        { "title": "Ingénieur conception mécanique – Propulsion vélique", "domain": "Engineering", "type": "job", "note": "Ref. 2026-2234" },
-        { "title": "Ingénieur calcul de structures, fatigue", "domain": "Engineering", "type": "internship", "note": "Ref. 2026-2226", "applyUrl": "https://carrieres-offresemploi.chantiers-atlantique.com/offre-de-emploi/emploi-stage-ingenieur-e-calcul-de-structures-fatigue-h-f_2226.aspx" }
+        { "title": "Ingénieur conception accastillage – Propulsion vélique", "domain": "Engineering", "type": "job", "note": "Ref. 2026-2235", "applyUrl": "https://carrieres-offresemploi.chantiers-atlantique.com/offre-de-emploi/emploi-ingenieur-conception-accastillage-propulsion-velique-h-f_2235.aspx" },
+        { "title": "Ingénieur conception mécanique – Propulsion vélique", "domain": "Engineering", "type": "job", "note": "Ref. 2026-2234", "applyUrl": "https://carrieres-offresemploi.chantiers-atlantique.com/offre-de-emploi/emploi-ingenieur-conception-mecanique-propulsion-velique-h-f_2234.aspx" }
       ]
     },
     {
@@ -248,10 +249,13 @@
       "website": "https://www.cma-cgm.com",
       "applyUrl": "https://jobs.cmacgm-group.com/job/Stagiaire-D%C3%A9carbonation-&-Strat%C3%A9gie-Environnementale/589467-fr_FR",
       "jobs": [
-        { "title": "Stagiaire Décarbonation & Stratégie environnementale", "domain": "Consulting", "type": "internship" },
-        { "title": "Chargé de mission Groupe Décarbonation", "domain": "Consulting", "type": "internship" },
-        { "title": "Coordination Décarbonation & Projets groupe", "domain": "Business", "type": "internship" },
-        { "title": "Chargé de Finance durable", "domain": "Business", "type": "internship" }
+        { "title": "Chargé de mission Groupe Décarbonation", "domain": "Consulting", "type": "internship", "applyUrl": "https://jobs.cmacgm-group.com/job/Marseille-Stage-Charg%C3%A9-de-mission-Groupe-D%C3%A9carbonation-%28HF%29/1440143533/" },
+        { "title": "Coordination Décarbonation & Projets groupe", "domain": "Business", "type": "internship", "applyUrl": "https://jobs.cmacgm-group.com/job/Marseille-Stage-Coordination-Decarbonation-&-Projets-groupe/1441103233/" },
+        { "title": "Stage - Alternative Fuels Analyst", "domain": "Business", "type": "internship", "applyUrl": "https://jobs.cmacgm-group.com/job/Marseille-Stage-Alternative-Fuels-Analyst/1436606133/" },
+        { "title": "Internship - Development of Operational Tools to Manage Tank Pressure on LNG-Fueled Containerships", "domain": "Engineering", "type": "internship", "applyUrl": "https://jobs.cmacgm-group.com/job/Marseille-Internship-Development-of-Operational-Tools-to-Manage-Tank-Pressure-on-LNG-Fueled-Containerships/1448594133/" },
+        { "title": "Internship - Operational Data Analysis for Optimal Boil-Off Gas Management on LNG-Fueled Containerships", "domain": "Data & AI", "type": "internship", "applyUrl": "https://jobs.cmacgm-group.com/job/Marseille-Internship-Operational-Data-Analysis-for-Optimal-Boil-Off-Gas-Management-on-LNG-Fueled-Containersh/1446195233/" },
+        { "title": "Stagiaire Performance Digitale Maritime - R&D", "domain": "Data & AI", "type": "internship", "applyUrl": "https://jobs.cmacgm-group.com/job/Marseille-Stagiaire-Performance-Digitale-Maritime-R&D/1449771633/" },
+        { "title": "Digital Project Manager for IMO&EU Compliance", "domain": "Software", "type": "job", "applyUrl": "https://jobs.cmacgm-group.com/job/Marseille-Digital-Project-Manager-for-IMO&EU-Compliance/1437243033/" }
       ]
     },
     {
@@ -290,10 +294,10 @@
       "website": "https://www.dice-engineering.com",
       "applyUrl": "https://www.dice-engineering.com/carriere",
       "jobs": [
-        { "title": "Ship Modeling and Simulation", "domain": "Engineering", "type": "internship" },
-        { "title": "Open Ship Digital-Twin", "domain": "Data & AI", "type": "internship" },
-        { "title": "Digital Twin Management & Data Validation", "domain": "Data & AI", "type": "internship" },
-        { "title": "Bras droit CEO / Chief of Staff", "domain": "Business", "type": "internship" }
+        { "title": "Ship Modeling and Simulation", "domain": "Engineering", "type": "internship", "applyUrl": "https://www.dice-engineering.com/career/stage-ship-modeling-and-simulation" },
+        { "title": "Open Ship Digital-Twin", "domain": "Data & AI", "type": "internship", "applyUrl": "https://www.dice-engineering.com/career/stage-open-ship-digital-twin" },
+        { "title": "Digital Twin Management & Data Validation", "domain": "Data & AI", "type": "internship", "applyUrl": "https://www.dice-engineering.com/career/stage-digital-twin-management-and-data-validation" },
+        { "title": "Bras droit CEO / Chief of Staff", "domain": "Business", "type": "internship", "applyUrl": "https://www.dice-engineering.com/career/stage-bras-droit-ceo-chief-of-staff" }
       ]
     },
     {
@@ -320,12 +324,12 @@
       "website": "https://www.econowind.nl",
       "applyUrl": "https://econowind.nl/careers/",
       "jobs": [
-        { "title": "Area Sales Manager", "domain": "Business", "type": "job" },
-        { "title": "Electrotechnical Field Engineer", "domain": "Engineering", "type": "job" },
-        { "title": "Electrical Technician", "domain": "Engineering", "type": "job" },
-        { "title": "Secretary Sales", "domain": "Business", "type": "job" },
-        { "title": "Maritime Field Engineer", "domain": "Engineering", "type": "job" },
-        { "title": "Proposal Engineer", "domain": "Engineering", "type": "job" }
+        { "title": "Area Sales Manager", "domain": "Business", "type": "job", "applyUrl": "https://econowind.nl/area-sales-manager/" },
+        { "title": "Electrotechnical Field Engineer", "domain": "Engineering", "type": "job", "applyUrl": "https://econowind.nl/electrotechnical-field-engineer/" },
+        { "title": "Electrical Technician", "domain": "Engineering", "type": "job", "applyUrl": "https://econowind.nl/electrical-technician/" },
+        { "title": "Secretary Sales", "domain": "Business", "type": "job", "applyUrl": "https://econowind.nl/secretary-sales/" },
+        { "title": "Maritime Field Engineer", "domain": "Engineering", "type": "job", "applyUrl": "https://econowind.nl/maritime-field-engineer/" },
+        { "title": "Proposal Engineer", "domain": "Engineering", "type": "job", "applyUrl": "https://econowind.nl/proposal-engineer-econowind/" }
       ]
     },
     {
@@ -361,7 +365,7 @@
       "website": "https://www.iscc-system.org",
       "applyUrl": "https://www.linkedin.com/posts/adam-kirby_interested-in-sustainability-and-marine-fuels-share-7511377175611203584-z6ZB/",
       "jobs": [
-        { "title": "Sustainability Manager – Sustainable Fuels (Marine Fuels)", "domain": "Consulting", "type": "job" }
+        { "title": "Sustainability Manager – Sustainable Fuels (Marine Fuels)", "domain": "Consulting", "type": "job", "applyUrl": "https://iscc-system-gmbh.jobs.personio.de/job/2625462" }
       ]
     },
     {
@@ -387,7 +391,7 @@
       "website": "https://marine-weather.com",
       "applyUrl": "https://www.linkedin.com/company/marine-weather-intelligence/jobs/",
       "jobs": [
-        { "title": "Weather Router (Maritime sector)", "domain": "Data & AI", "type": "job" }
+        { "title": "Weather Router (Maritime sector)", "domain": "Data & AI", "type": "job", "applyUrl": "https://careers.marine-weather.com/jobs/8462490-weather-router" }
       ]
     },
     {
@@ -400,9 +404,9 @@
       "website": "https://www.theoceanbird.com",
       "applyUrl": "https://www.theoceanbird.com/about-us/careers",
       "jobs": [
-        { "title": "Sales Manager Europe", "domain": "Business", "type": "job", "note": "Stockholm / Nordics / remote" },
-        { "title": "Structural Engineer", "domain": "Engineering", "type": "job" },
-        { "title": "Installation Lead", "domain": "Operations", "type": "job", "city": "Landskrona" }
+        { "title": "Sales Manager Europe", "domain": "Business", "type": "job", "note": "Stockholm / Nordics / remote", "applyUrl": "https://www.theoceanbird.com/about-us/careers/sales-manager-europe" },
+        { "title": "Structural Engineer", "domain": "Engineering", "type": "job", "applyUrl": "https://www.theoceanbird.com/about-us/careers/structural-engineer" },
+        { "title": "Installation Lead", "domain": "Operations", "type": "job", "city": "Landskrona", "applyUrl": "https://www.theoceanbird.com/about-us/careers/installation-lead" }
       ]
     },
     {
@@ -428,10 +432,10 @@
       "website": "https://www.royalcaribbeangroup.com",
       "applyUrl": "https://jobs.royalcaribbeangroup.com/search/?q=decarbonization",
       "jobs": [
-        { "title": "Manager, Maritime Technical", "domain": "Engineering", "type": "job", "city": "Turku", "country": "FI" },
-        { "title": "Senior Manager, Decarbonization Strategy", "domain": "Business", "type": "job" },
-        { "title": "Senior Analyst, Decarbonization", "domain": "Consulting", "type": "job" },
-        { "title": "Analyst, Deployment Planning", "domain": "Business", "type": "job" }
+        { "title": "Manager, Maritime Technical", "domain": "Engineering", "type": "job", "city": "Turku", "country": "FI", "applyUrl": "https://jobs.royalcaribbeangroup.com/job/Turku-Manager%2C-Maritime-Technical-20240/1411426000/" },
+        { "title": "Senior Manager, Decarbonization Strategy", "domain": "Business", "type": "job", "applyUrl": "https://jobs.royalcaribbeangroup.com/job/Miami-Senior-Manager%2C-Decarbonization-Strategy-FL-33132/1378741200/" },
+        { "title": "Senior Analyst, Decarbonization", "domain": "Consulting", "type": "job", "applyUrl": "https://jobs.royalcaribbeangroup.com/job/Miami-Senior-Analyst%2C-Decarbonization-FL-33132/1423183000/" },
+        { "title": "Analyst, Deployment Planning", "domain": "Business", "type": "job", "applyUrl": "https://jobs.royalcaribbeangroup.com/job/Miami-Analyst%2C-Deployment-Planning-FL-33132/1428603000/" }
       ]
     },
     {
@@ -472,7 +476,8 @@
       "website": "https://www.stormgeo.com",
       "applyUrl": "https://www.linkedin.com/jobs/view/4472152798/",
       "jobs": [
-        { "title": "Vessel Performance Manager", "domain": "Data & AI", "type": "job", "city": "Singapore", "country": "SG" }
+        { "title": "Vessel Performance Manager", "domain": "Data & AI", "type": "job", "city": "Singapore", "country": "SG" },
+        { "title": "Fleet Performance Executive", "domain": "Operations", "type": "job", "city": "Singapore", "country": "SG", "applyUrl": "https://www.stormgeo.com/careers" }
       ]
     },
     {
@@ -485,14 +490,20 @@
       "website": "https://syro.co",
       "applyUrl": "https://syro.co/en/company-about-syroco/",
       "jobs": [
-        { "title": "Regional Sales Manager Germany", "domain": "Business", "type": "job", "city": "Hamburg", "country": "DE" },
-        { "title": "Sales Representative Southern Europe", "domain": "Business", "type": "job" },
-        { "title": "Sales Representative Netherlands", "domain": "Business", "type": "job", "note": "Marseille / remote" },
-        { "title": "Data Engineer", "domain": "Data & AI", "type": "internship", "note": "Apprenticeship" },
-        { "title": "Product Data Analyst", "domain": "Data & AI", "type": "internship" },
-        { "title": "Customer Project Manager", "domain": "Business", "type": "internship" },
-        { "title": "Operational Support & Onwatch Improvement", "domain": "Business", "type": "internship" },
-        { "title": "Data & AI System Intern", "domain": "Data & AI", "type": "internship" }
+        { "title": "Regional Sales Manager Germany", "domain": "Business", "type": "job", "city": "Hamburg", "country": "DE", "applyUrl": "https://syroco.jobs.personio.com/job/1921433?language=en" },
+        { "title": "Sales Representative Southern Europe", "domain": "Business", "type": "job", "applyUrl": "https://syroco.jobs.personio.com/job/2257421?language=en" },
+        { "title": "Sales Representative Netherlands", "domain": "Business", "type": "job", "note": "Marseille / remote", "applyUrl": "https://syroco.jobs.personio.com/job/2257473?language=en" },
+        { "title": "Data Engineer", "domain": "Data & AI", "type": "internship", "note": "Apprenticeship", "applyUrl": "https://syroco.jobs.personio.com/job/2449877?language=en" },
+        { "title": "Customer Project Manager", "domain": "Business", "type": "internship", "applyUrl": "https://syroco.jobs.personio.com/job/2261516?language=en" },
+        { "title": "Operational Support & Onwatch Improvement", "domain": "Business", "type": "internship", "applyUrl": "https://syroco.jobs.personio.com/job/2603646?language=en" },
+        { "title": "Data & AI System Intern", "domain": "Data & AI", "type": "internship", "applyUrl": "https://syroco.jobs.personio.com/job/2685045?language=en" },
+        { "title": "Product Data Analyst", "domain": "Data & AI", "type": "internship", "applyUrl": "https://syroco.jobs.personio.com/job/2437203?language=en" },
+        { "title": "Sales Representative Denmark", "domain": "Business", "type": "job", "note": "CDI", "applyUrl": "https://syroco.jobs.personio.com/job/2257441?language=en" },
+        { "title": "Customer Success Manager", "domain": "Business", "type": "job", "note": "CDI · Hamburg or Marseille", "applyUrl": "https://syroco.jobs.personio.com/job/1921308?language=en" },
+        { "title": "Customer Success Manager - Norway", "domain": "Business", "type": "job", "city": "Oslo", "country": "NO", "note": "CDI", "applyUrl": "https://syroco.jobs.personio.com/job/2404151?language=en" },
+        { "title": "Staff Software Engineer", "domain": "Software", "type": "job", "note": "CDI · Marseille / remote in France", "applyUrl": "https://syroco.jobs.personio.com/job/1921356?language=en" },
+        { "title": "Alternance - Chief of Staff Junior - RH & Finance Ops", "domain": "Business", "type": "internship", "note": "Apprenticeship", "applyUrl": "https://syroco.jobs.personio.com/job/2531437?language=en" },
+        { "title": "Chargé(e) de Communication & Content Marketing", "domain": "Business", "type": "internship", "applyUrl": "https://syroco.jobs.personio.com/job/2562314?language=en" }
       ]
     },
     {
@@ -505,7 +516,7 @@
       "website": "https://toqua.ai",
       "applyUrl": "https://toqua.ai/careers",
       "jobs": [
-        { "title": "Product Engineer", "domain": "Software", "type": "job" }
+        { "title": "Product Engineer", "domain": "Software", "type": "job", "applyUrl": "https://toqua.ai/jobs/product-engineer" }
       ]
     },
     {
@@ -545,13 +556,10 @@
       "website": "https://zeronorth.com",
       "applyUrl": "https://careers.zeronorth.com/",
       "jobs": [
-        { "title": "Maritime Data Integration Senior Analyst", "domain": "Data & AI", "type": "job", "city": "Mumbai", "country": "IN", "note": "Mumbai / Chennai" },
-        { "title": "Product Manager – Voyage Insights & Claims", "domain": "Business", "type": "job", "city": "Chennai", "country": "IN" },
-        { "title": "Senior Data Engineer", "domain": "Data & AI", "type": "job" },
-        { "title": "Voyage Optimisation Analyst", "domain": "Data & AI", "type": "job", "city": "Mumbai", "country": "IN" },
-        { "title": "Voyage Optimisation Specialist", "domain": "Data & AI", "type": "job", "city": "Mumbai", "country": "IN", "note": "Hybrid" },
-        { "title": "Vessel Optimisation Analyst", "domain": "Data & AI", "type": "job", "city": "Chennai", "country": "IN", "note": "Chennai / Mumbai" },
-        { "title": "Customer Experience Specialist", "domain": "Business", "type": "job", "city": "Chennai", "country": "IN" }
+        { "title": "Voyage Optimisation Analyst", "domain": "Data & AI", "type": "job", "city": "Mumbai", "country": "IN", "applyUrl": "https://careers.zeronorth.com/jobs/7364854-voyage-optimisation-analyst" },
+        { "title": "Voyage Optimisation Specialist", "domain": "Data & AI", "type": "job", "city": "Mumbai", "country": "IN", "note": "Hybrid", "applyUrl": "https://careers.zeronorth.com/jobs/7184745-voyage-optimisation-specialist" },
+        { "title": "Vessel Optimisation Analyst", "domain": "Data & AI", "type": "job", "city": "Chennai", "country": "IN", "note": "Chennai / Mumbai", "applyUrl": "https://careers.zeronorth.com/jobs/5396649-vessel-optimisation-analyst" },
+        { "title": "Customer Experience Specialist", "domain": "Business", "type": "job", "city": "Chennai", "country": "IN", "applyUrl": "https://careers.zeronorth.com/jobs/6455229-customer-experience-specialist" }
       ]
     }
   ]

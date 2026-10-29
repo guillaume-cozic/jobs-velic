@@ -4,3 +4,6 @@ dist/
 .env
 .env.production
 .DS_Store
+
+# Crawl results from the refresh-jobs skill
+.crawl/
